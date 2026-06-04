@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harsh's Creative World 🚀</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Poppins',sans-serif;background:#f0f8ff;color:#333;overflow-x:hidden;transition:.4s;}
+#loader{position:fixed;top:0;left:0;width:100%;height:100%;background:#0a0a1a;color:white;display:flex;justify-content:center;align-items:center;z-index:99999;flex-direction:column;gap:20px;transition:opacity .4s;}
+.loader-bar{width:220px;height:6px;background:#222;border-radius:10px;overflow:hidden;}
+.loader-fill{height:100%;background:linear-gradient(90deg,#4CAF50,#00e676);border-radius:10px;animation:loadFill 2.2s ease forwards;}
+@keyframes loadFill{from{width:0%}to{width:100%}}
+.loader-content{text-align:center;font-family:'Orbitron',monospace;}
+.loader-content h1{font-size:1.8rem;background:linear-gradient(90deg,#4CAF50,#00e676);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+#progressBar{position:fixed;top:0;left:0;width:0%;height:4px;background:linear-gradient(90deg,#4CAF50,#00e676);z-index:99999;}
+.dark{background:#0d0d1a;color:#eee;}
+.dark nav{background:#0a0a1a;border-bottom:1px solid #222;}
+.dark .glass-card{background:rgba(255,255,255,.05);color:#eee;border:1px solid rgba(255,255,255,.08);}
+.dark .game-card{background:#111827;color:#eee;border:1px solid rgba(255,255,255,.07);}
+.dark .stat-card{background:#111827;color:#eee;}
+.dark footer{background:#000;}
+.dark .about-left,.dark .about-right{background:rgba(255,255,255,.05);color:#eee;}
+.dark .about-left p{color:#bbb;}
+.dark .about-info span{background:#1a2a1a;color:#4CAF50;}
+.dark .skill-bar{background:#333;}
+.dark .game-love-card{background:#111827;}
+.dark .glc-body p{color:#aaa;}
+.dark .game-card input{background:#0d0d1a;color:#eee;border-color:#333;}
+.dark .quiz-option{color:#eee;border-color:#333;}
+.dark .quiz-option:hover{background:rgba(76,175,80,.12);}
+.dark .word-tile{border-color:#444;}
+.dark #reactionBox{background:#1a1a2e;color:#eee;}
+nav{display:flex;justify-content:center;align-items:center;gap:5px;flex-wrap:wrap;position:sticky;top:0;padding:12px 20px;background:#4CAF50;z-index:1000;box-shadow:0 4px 20px rgba(0,0,0,.15);}
+nav a{color:white;text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:.4px;transition:.3s;padding:6px 12px;border-radius:20px;}
+nav a:hover{color:#ffdd57;background:rgba(255,255,255,.15);}
+#themeBtn{padding:7px 14px;border:none;border-radius:20px;cursor:pointer;font-size:16px;background:rgba(255,255,255,.2);color:white;font-weight:700;margin-left:10px;transition:.3s;}
+#themeBtn:hover{background:rgba(255,255,255,.35);}
+header{height:100vh;display:flex;justify-content:center;align-items:center;flex-direction:column;text-align:center;color:white;position:relative;overflow:hidden;background:linear-gradient(270deg,#ff9966,#ff5e62,#6a11cb,#2575fc);background-size:800% 800%;animation:gradientBG 15s ease infinite;}
+@keyframes gradientBG{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+header h1{font-family:'Orbitron',monospace;font-size:2.8rem;margin-bottom:15px;text-shadow:0 0 40px rgba(255,255,255,.4);}
+header p{font-size:1.2rem;opacity:.9;letter-spacing:2px;}
+.hero-btn{margin-top:25px;padding:14px 35px;border:none;border-radius:30px;font-size:16px;cursor:pointer;background:white;font-weight:700;color:#6a11cb;transition:.3s;box-shadow:0 10px 30px rgba(0,0,0,.25);}
+.hero-btn:hover{transform:scale(1.08);box-shadow:0 18px 40px rgba(0,0,0,.3);}
+.circle{position:absolute;border-radius:50%;opacity:.15;animation:float 10s infinite;}
+.c1{width:80px;height:80px;top:15%;left:20%;background:white;}
+.c2{width:120px;height:120px;top:30%;left:75%;background:yellow;}
+.c3{width:60px;height:60px;top:70%;left:40%;background:#ff5e62;}
+.c4{width:50px;height:50px;top:55%;left:15%;background:#00e676;}
+.c5{width:90px;height:90px;top:80%;left:70%;background:#fff;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-40px) translateX(15px)}}
+section{padding:70px 20px;}
+section h2{text-align:center;margin-bottom:30px;font-size:2rem;font-family:'Orbitron',monospace;position:relative;}
+section h2::after{content:'';display:block;width:60px;height:4px;background:linear-gradient(90deg,#4CAF50,#00e676);margin:10px auto 0;border-radius:2px;}
+.glass-card{max-width:900px;margin:auto;padding:30px;border-radius:20px;background:rgba(255,255,255,.65);backdrop-filter:blur(12px);box-shadow:0 8px 30px rgba(0,0,0,.1);border:1px solid rgba(255,255,255,.5);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px;max-width:950px;margin:auto;}
+.about-left,.about-right{padding:25px;border-radius:20px;background:rgba(255,255,255,.75);backdrop-filter:blur(10px);box-shadow:0 8px 25px rgba(0,0,0,.08);}
+.about-left h3{font-size:1.5rem;color:#4CAF50;margin-bottom:12px;font-family:'Orbitron',monospace;}
+.about-left p{line-height:1.8;color:#555;font-size:.95rem;}
+.about-info{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px;}
+.about-info span{padding:6px 14px;border-radius:20px;background:#e8f5e9;color:#2e7d32;font-size:.82rem;font-weight:700;}
+.about-right h3{font-size:1.1rem;margin-bottom:18px;font-family:'Orbitron',monospace;color:#4CAF50;}
+.skill-item{margin-bottom:16px;}
+.skill-item label{display:flex;justify-content:space-between;font-weight:700;font-size:.88rem;margin-bottom:6px;}
+.skill-bar{height:10px;background:#e0e0e0;border-radius:10px;overflow:hidden;}
+.skill-bar-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,#4CAF50,#00e676);width:0%;transition:width 1.5s ease;}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;}
+.gallery-card{height:210px;border-radius:18px;overflow:hidden;cursor:pointer;position:relative;box-shadow:0 5px 20px rgba(0,0,0,.12);transition:.4s;}
+.gallery-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 20px 45px rgba(0,0,0,.2);}
+.gallery-card img{width:100%;height:100%;object-fit:cover;transition:.5s;display:block;}
+.gallery-card:hover img{transform:scale(1.1);}
+.gallery-label{position:absolute;bottom:0;left:0;right:0;padding:14px 12px 12px;background:linear-gradient(transparent,rgba(0,0,0,.75));color:white;font-weight:700;font-size:.88rem;}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:18px;}
+.stat-card{padding:25px;border-radius:18px;text-align:center;background:white;box-shadow:0 5px 20px rgba(0,0,0,.07);transition:.3s;border-top:4px solid #4CAF50;}
+.stat-card:hover{transform:translateY(-8px);}
+.stat-card h1{font-size:2.3rem;color:#4CAF50;font-family:'Orbitron',monospace;}
+.stat-card p{color:#777;margin-top:5px;font-weight:600;font-size:.9rem;}
+.dark .stat-card p{color:#aaa;}
+.games-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;}
+.game-card{padding:22px;border-radius:18px;background:white;box-shadow:0 5px 20px rgba(0,0,0,.08);border-bottom:3px solid #4CAF50;transition:.3s;}
+.game-card:hover{transform:translateY(-6px);}
+.game-card h3{margin-bottom:8px;font-size:1rem;}
+.game-card input[type=number],.game-card input[type=text]{padding:9px 12px;width:100%;margin:7px 0;border:2px solid #e0e0e0;border-radius:10px;font-size:.9rem;outline:none;transition:.3s;font-family:'Poppins',sans-serif;}
+.game-card input:focus{border-color:#4CAF50;}
+.game-card button{padding:9px 14px;margin:4px 4px 4px 0;border:none;border-radius:10px;background:linear-gradient(135deg,#4CAF50,#00e676);color:white;cursor:pointer;font-weight:700;font-size:.85rem;transition:.3s;}
+.game-card button:hover{transform:scale(1.05);}
+.game-result{margin-top:8px;padding:9px 12px;border-radius:10px;background:rgba(76,175,80,.08);font-weight:600;font-size:.88rem;min-height:36px;border-left:3px solid #4CAF50;}
+.game-score{font-size:.78rem;color:#888;margin-top:4px;}
+.memory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:10px;}
+.mem-card{height:52px;border-radius:9px;background:linear-gradient(135deg,#6c5ce7,#a29bfe);cursor:pointer;display:flex;justify-content:center;align-items:center;font-size:1.4rem;transition:.3s;user-select:none;}
+.mem-card .front{display:none;}
+.mem-card.flipped{background:white;box-shadow:0 3px 10px rgba(0,0,0,.12);}
+.mem-card.flipped .front,.mem-card.matched .front{display:flex;justify-content:center;align-items:center;width:100%;height:100%;}
+.mem-card.flipped .back,.mem-card.matched .back{display:none;}
+.mem-card.matched{background:linear-gradient(135deg,#4CAF50,#00e676);}
+#snakeCanvas{border-radius:10px;display:block;margin:8px auto 0;background:#0d0d1a;}
+.snake-controls{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:6px;}
+.snake-dpad{display:grid;grid-template-columns:repeat(3,38px);grid-template-rows:repeat(3,38px);gap:3px;margin:8px auto 0;width:fit-content;}
+.snake-dpad button{width:38px;height:38px;border:none;border-radius:9px;background:linear-gradient(135deg,#4CAF50,#00e676);color:white;font-size:1.1rem;cursor:pointer;display:flex;justify-content:center;align-items:center;transition:.2s;}
+.snake-dpad button:active{transform:scale(.9);}
+.snake-dpad .dpad-empty{background:transparent;pointer-events:none;}
+.quiz-option{display:block;width:100%;padding:9px 12px;margin:4px 0;border:2px solid #e0e0e0;border-radius:10px;background:transparent;cursor:pointer;text-align:left;font-size:.85rem;font-weight:600;transition:.3s;font-family:'Poppins',sans-serif;}
+.quiz-option:hover{border-color:#4CAF50;background:rgba(76,175,80,.07);}
+.quiz-option.correct{background:#e8f5e9;border-color:#4CAF50;color:#2e7d32;}
+.quiz-option.wrong{background:#ffebee;border-color:#f44336;color:#c62828;}
+#reactionBox{width:100%;height:80px;border-radius:12px;background:#e8e8e8;display:flex;justify-content:center;align-items:center;font-weight:700;font-size:.95rem;cursor:pointer;margin-top:10px;transition:.4s;user-select:none;border:2px solid #ddd;}
+.word-row{display:flex;gap:5px;justify-content:center;margin:3px 0;}
+.word-tile{width:38px;height:38px;border:2px solid #ccc;border-radius:8px;display:flex;justify-content:center;align-items:center;font-weight:900;font-size:1rem;text-transform:uppercase;transition:.3s;}
+.word-tile.correct{background:#4CAF50;color:white;border-color:#4CAF50;}
+.word-tile.present{background:#ff9800;color:white;border-color:#ff9800;}
+.word-tile.absent{background:#9e9e9e;color:white;border-color:#9e9e9e;}
+.word-input-row{display:flex;gap:8px;margin-top:8px;}
+.word-input-row input{flex:1;padding:9px;border-radius:9px;border:2px solid #e0e0e0;font-size:.9rem;outline:none;font-family:'Poppins',sans-serif;}
+.game-love-card{border-radius:18px;overflow:hidden;background:white;box-shadow:0 8px 25px rgba(0,0,0,.1);transition:.4s;}
+.game-love-card:hover{transform:translateY(-10px);box-shadow:0 22px 45px rgba(0,0,0,.18);}
+.glc-img{height:170px;overflow:hidden;position:relative;background:#1a1a2e;}
+.glc-img img{width:100%;height:100%;object-fit:cover;transition:.5s;display:block;}
+.game-love-card:hover .glc-img img{transform:scale(1.1);}
+.glc-img-fallback{width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:3rem;color:white;}
+.glc-body{padding:18px;}
+.glc-body h3{font-size:1rem;margin-bottom:6px;}
+.glc-body p{font-size:.83rem;color:#666;line-height:1.6;}
+.glc-tag{display:inline-block;margin-top:10px;padding:4px 12px;border-radius:20px;background:linear-gradient(135deg,#4CAF50,#00e676);color:white;font-size:.75rem;font-weight:700;}
+.dark .game-love-card{background:#111827;}
+
+/* AI Chatbox */
+#aiChatBtn{position:fixed;bottom:20px;left:20px;width:58px;height:58px;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:26px;cursor:pointer;background:linear-gradient(135deg,#4CAF50,#00e676);color:white;box-shadow:0 0 25px rgba(76,175,80,.5);animation:aiPulse 2s infinite;border:none;z-index:5000;}
+@keyframes aiPulse{50%{transform:scale(1.1);box-shadow:0 0 35px rgba(76,175,80,.7);}}
+#chatBox{position:fixed;bottom:90px;left:20px;width:320px;max-height:440px;background:white;border-radius:20px;box-shadow:0 15px 50px rgba(0,0,0,.2);display:none;flex-direction:column;z-index:5001;overflow:hidden;border:1px solid rgba(0,0,0,.08);}
+.dark #chatBox{background:#111827;border-color:#333;}
+#chatHeader{padding:14px 18px;background:linear-gradient(135deg,#4CAF50,#00e676);color:white;font-weight:700;display:flex;justify-content:space-between;align-items:center;font-size:.95rem;}
+#chatClose{cursor:pointer;font-size:1.1rem;background:none;border:none;color:white;padding:0;}
+#chatMessages{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;max-height:300px;}
+.chat-msg{padding:10px 13px;border-radius:14px;font-size:.85rem;line-height:1.5;max-width:88%;}
+.chat-msg.bot{background:#f0f8f0;color:#333;align-self:flex-start;border-bottom-left-radius:4px;}
+.chat-msg.user{background:linear-gradient(135deg,#4CAF50,#00e676);color:white;align-self:flex-end;border-bottom-right-radius:4px;}
+.dark .chat-msg.bot{background:#1a2a1a;color:#eee;}
+#chatInputArea{display:flex;gap:8px;padding:12px;border-top:1px solid #eee;}
+.dark #chatInputArea{border-top-color:#333;}
+#chatInput{flex:1;padding:9px 13px;border:2px solid #e0e0e0;border-radius:12px;font-size:.85rem;outline:none;font-family:'Poppins',sans-serif;transition:.3s;}
+#chatInput:focus{border-color:#4CAF50;}
+.dark #chatInput{background:#0d0d1a;color:#eee;border-color:#333;}
+#chatSend{padding:9px 14px;border:none;border-radius:12px;background:linear-gradient(135deg,#4CAF50,#00e676);color:white;cursor:pointer;font-weight:700;font-size:.85rem;}
+.chat-typing{display:flex;gap:5px;align-items:center;padding:8px 12px;}
+.dot{width:8px;height:8px;border-radius:50%;background:#4CAF50;animation:bounce .8s infinite;}
+.dot:nth-child(2){animation-delay:.15s;}
+.dot:nth-child(3){animation-delay:.3s;}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+#quoteText{font-size:1.25rem;font-weight:700;text-align:center;line-height:1.7;font-style:italic;}
+form{display:flex;flex-direction:column;}
+form input,form textarea{padding:12px 14px;margin-bottom:14px;border:2px solid #e0e0e0;border-radius:12px;font-size:.93rem;outline:none;transition:.3s;font-family:'Poppins',sans-serif;}
+form input:focus,form textarea:focus{border-color:#4CAF50;}
+.dark form input,.dark form textarea{background:#111827;color:#eee;border-color:#333;}
+form button{padding:13px;border:none;border-radius:12px;background:linear-gradient(135deg,#4CAF50,#00e676);color:white;cursor:pointer;font-weight:700;font-size:1rem;transition:.3s;}
+form button:hover{transform:scale(1.02);box-shadow:0 8px 20px rgba(76,175,80,.35);}
+footer{text-align:center;padding:25px;background:#0d0d1a;color:#aaa;}
+footer span{color:#4CAF50;font-weight:700;}
+#topBtn{position:fixed;right:20px;bottom:20px;padding:13px 15px;border:none;border-radius:50%;cursor:pointer;display:none;background:linear-gradient(135deg,#4CAF50,#00e676);color:white;font-size:16px;box-shadow:0 5px 15px rgba(76,175,80,.4);z-index:4999;}
+.reveal{opacity:0;transform:translateY(28px);transition:.6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+@media(max-width:768px){
+header h1{font-size:1.9rem;}
+.about-grid{grid-template-columns:1fr;}
+section h2{font-size:1.5rem;}
+#chatBox{width:290px;}
+.memory-grid .mem-card{height:46px;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-content">
+    <h1>🚀 Harsh's World</h1>
+    <p style="color:#aaa;margin:8px 0 16px;font-size:.9rem;">Loading Amazing Experience...</p>
+  </div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+</div>
+<div id="progressBar"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#home">🏠 Home</a>
+  <a href="#about">👤 About</a>
+  <a href="#gallery">🎨 Gallery</a>
+  <a href="#miniGames">🎮 Games</a>
+  <a href="#stats">📊 Stats</a>
+  <a href="#contact">📩 Contact</a>
+  <button id="themeBtn">🌙 Dark</button>
+</nav>
+
+<!-- HERO -->
+<header id="home">
+  <div class="circle c1"></div><div class="circle c2"></div><div class="circle c3"></div>
+  <div class="circle c4"></div><div class="circle c5"></div>
+  <h1 id="typingText"></h1>
+  <p>Dream Big • Create • Play • Win</p>
+  <button class="hero-btn" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">✨ Explore Now</button>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <h2>👤 About Me</h2>
+  <div class="about-grid">
+    <div class="about-left reveal">
+      <h3>Harsh Harode</h3>
+      <p>Hey! Main <strong>Harsh Harode</strong> hoon — ek passionate creator, gamer, aur coder. Mujhe creative designs banana, new technologies seekhna, aur gaming mein apna best dena bahut pasand hai. 🎯</p>
+      <p style="margin-top:11px;">Main believe karta hoon ki <em>creativity aur consistency</em> se koi bhi goal achieve kiya ja sakta hai. Mera sapna hai ek aise world banane ka jo colorful, fun aur inspiring ho! 🌈</p>
+      <p style="margin-top:11px;">Jab coding nahi karta, tab games khelta hoon, naye ideas explore karta hoon, ya dosto ke saath epic gaming sessions karta hoon. 🎮</p>
+      <div class="about-info">
+        <span>🎮 Gamer</span><span>💻 Coder</span><span>🎨 Designer</span>
+        <span>🚀 Dreamer</span><span>📚 Learner</span><span>🏆 Winner</span>
+      </div>
+    </div>
+    <div class="about-right reveal">
+      <h3>My Skills</h3>
+      <div class="skill-item"><label><span>💻 Web Dev</span><span>88%</span></label><div class="skill-bar"><div class="skill-bar-fill" data-w="88"></div></div></div>
+      <div class="skill-item"><label><span>🎨 UI Design</span><span>82%</span></label><div class="skill-bar"><div class="skill-bar-fill" data-w="82"></div></div></div>
+      <div class="skill-item"><label><span>🎮 Gaming</span><span>95%</span></label><div class="skill-bar"><div class="skill-bar-fill" data-w="95"></div></div></div>
+      <div class="skill-item"><label><span>🚀 Creativity</span><span>90%</span></label><div class="skill-bar"><div class="skill-bar-fill" data-w="90"></div></div></div>
+      <div class="skill-item"><label><span>🧠 Problem Solving</span><span>85%</span></label><div class="skill-bar"><div class="skill-bar-fill" data-w="85"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <h2>🎨 Creative Gallery</h2>
+  <div class="gallery" id="galleryGrid"></div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <h2>📊 My Statistics</h2>
+  <div class="stats-grid">
+    <div class="stat-card reveal"><h1 id="count1">0</h1><p>👁 Visitors</p></div>
+    <div class="stat-card reveal"><h1 id="count2">0</h1><p>📁 Projects</p></div>
+    <div class="stat-card reveal"><h1 id="count3">0</h1><p>🎮 Games Played</p></div>
+    <div class="stat-card reveal"><h1 id="count4">0</h1><p>🏆 Achievements</p></div>
+    <div class="stat-card reveal"><h1 id="count5">0</h1><p>☕ Coffees</p></div>
+    <div class="stat-card reveal"><h1 id="count6">0</h1><p>💻 Code Lines</p></div>
+  </div>
+</section>
+
+<!-- MINI GAMES -->
+<section id="miniGames">
+  <h2>🎮 Play Mini Games</h2>
+  <div class="games-grid">
+
+    <div class="game-card reveal">
+      <h3>🎲 Guess Number</h3>
+      <p class="game-score">Guess 1–100 | 7 tries</p>
+      <input id="guessInput" type="number" placeholder="Enter guess..." min="1" max="100">
+      <button onclick="guessGame()">Guess!</button>
+      <button onclick="resetGuess()">Reset</button>
+      <p id="guessResult" class="game-result"></p>
+      <p class="game-score" id="guessAttempts"></p>
+    </div>
+
+    <div class="game-card reveal">
+      <h3>✊ Rock Paper Scissors</h3>
+      <p class="game-score" id="rpsScore">Win: 0 | Lose: 0 | Draw: 0</p>
+      <div style="margin-top:9px;">
+        <button onclick="rps('rock')">✊</button>
+        <button onclick="rps('paper')">✋</button>
+        <button onclick="rps('scissors')">✌</button>
+      </div>
+      <p id="rpsResult" class="game-result"></p>
+    </div>
+
+    <div class="game-card reveal">
+      <h3>🧠 Memory Match</h3>
+      <p class="game-score" id="memScore">Moves: 0 | Matched: 0/8</p>
+      <div class="memory-grid" id="memGrid"></div>
+      <button onclick="initMemory()" style="margin-top:8px;">🔄 Restart</button>
+    </div>
+
+    <div class="game-card reveal">
+      <h3>🐍 Snake Game</h3>
+      <p class="game-score" id="snakeScore">Score: 0</p>
+      <canvas id="snakeCanvas" width="200" height="180"></canvas>
+      <div class="snake-controls">
+        <button onclick="startSnake()">▶ Start</button>
+        <button onclick="stopSnake()">⏹ Stop</button>
+      </div>
+      <div class="snake-dpad">
+        <div class="dpad-empty"></div>
+        <button onclick="snakeMove('up')">⬆️</button>
+        <div class="dpad-empty"></div>
+        <button onclick="snakeMove('left')">⬅️</button>
+        <div class="dpad-empty"></div>
+        <button onclick="snakeMove('right')">➡️</button>
+        <div class="dpad-empty"></div>
+        <button onclick="snakeMove('down')">⬇️</button>
+        <div class="dpad-empty"></div>
+      </div>
+    </div>
+
+    <div class="game-card reveal">
+      <h3>🎯 Quiz Time</h3>
+      <p class="game-score" id="quizScore">Score: 0/5</p>
+      <div id="quizArea"></div>
+    </div>
+
+    <div class="game-card reveal">
+      <h3>⚡ Reaction Test</h3>
+      <p class="game-score">Click when GREEN appears!</p>
+      <div id="reactionBox" onclick="reactionClick()">Click to Start</div>
+      <p id="reactionResult" class="game-result"></p>
+    </div>
+
+    <div class="game-card reveal">
+      <h3>🔢 Math Challenge</h3>
+      <p class="game-score" id="mathScore">Score: 0 | Streak: 0</p>
+      <p id="mathQuestion" style="font-weight:700;font-size:1.1rem;margin:8px 0;">Press Start!</p>
+      <input id="mathInput" type="number" placeholder="Answer...">
+      <button onclick="checkMath()">Submit</button>
+      <button onclick="newMath()">New</button>
+      <p id="mathResult" class="game-result"></p>
+    </div>
+
+    <div class="game-card reveal">
+      <h3>🟩 Word Guess</h3>
+      <p class="game-score">Guess the 4-letter word! (6 tries)</p>
+      <div id="wordGrid"></div>
+      <div class="word-input-row">
+        <input id="wordInput" type="text" maxlength="4" placeholder="4 letters...">
+        <button onclick="submitWord()">Go!</button>
+      </div>
+      <p id="wordResult" class="game-result"></p>
+    </div>
+
+    <div class="game-card reveal">
+      <h3>🎪 Games I Love</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;" id="gameLoveGrid"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MOTIVATION -->
+<section id="motivation">
+  <h2>💬 Daily Motivation</h2>
+  <div class="glass-card reveal">
+    <p id="quoteText">Loading inspiration...</p>
+    <div style="text-align:center;margin-top:20px;">
+      <button onclick="newQuote()" style="padding:10px 25px;border:none;border-radius:20px;background:linear-gradient(135deg,#4CAF50,#00e676);color:white;cursor:pointer;font-weight:700;font-size:.9rem;">✨ New Quote</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2>📩 Contact Me</h2>
+  <div class="glass-card reveal">
+    <form action="https://formspree.io/f/mvznovpp" method="POST">
+      <input type="text" name="name" placeholder="Your Name 👤" required>
+      <input type="email" name="email" placeholder="Your Email 📧" required>
+      <textarea rows="4" name="message" placeholder="Your Message 💬" required></textarea>
+      <button type="submit">🚀 Send Message</button>
+    </form>
+    <p id="formMsg" style="text-align:center;margin-top:12px;font-weight:700;color:#4CAF50;"></p>
+    <div style="text-align:center;margin-top:20px;">
+      <p style="font-weight:600;margin-bottom:12px;color:#666;">Ya seedha connect karo 👇</p>
+      <a href="https://www.instagram.com/harsh__harode" target="_blank" style="display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:25px;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:white;text-decoration:none;font-weight:700;font-size:.95rem;box-shadow:0 5px 20px rgba(220,39,67,.35);transition:.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        📸 @harsh__harode
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Made with ❤️ by <span>Harsh Harode</span> | 2026 🚀</p>
+
+</footer>
+
+<!-- AI Chat Button -->
+<button id="aiChatBtn" onclick="toggleChat()">🤖</button>
+<div id="chatBox">
+  <div id="chatHeader">
+    <span>🤖 Harsh's AI Assistant</span>
+    <button id="chatClose" onclick="toggleChat()">✕</button>
+  </div>
+  <div id="chatMessages"></div>
+  <div id="chatInputArea">
+    <input id="chatInput" type="text" placeholder="Ask me anything..." onkeypress="if(event.key==='Enter')sendChat()">
+    <button id="chatSend" onclick="sendChat()">Send</button>
+  </div>
+</div>
+
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆</button>
+
+<script>
+// ===================== LOADER =====================
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    const l=document.getElementById('loader');
+    l.style.opacity='0';
+    setTimeout(()=>l.style.display='none',400);
+  },2400);
+});
+
+// ===================== PROGRESS BAR =====================
+window.addEventListener('scroll',()=>{
+  const s=document.documentElement.scrollTop;
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('progressBar').style.width=(s/h*100)+'%';
+  document.getElementById('topBtn').style.display=s>300?'block':'none';
+});
+
+// ===================== DARK MODE =====================
+const themeBtn=document.getElementById('themeBtn');
+themeBtn.addEventListener('click',()=>{
+  document.body.classList.toggle('dark');
+  themeBtn.textContent=document.body.classList.contains('dark')?'☀️ Light':'🌙 Dark';
+});
+
+// ===================== TYPING =====================
+const texts=['🚀 Harsh\'s Creative World','💻 Coder & Designer','🎮 Epic Gamer','🌟 Dream Creator'];
+let ti=0,ci=0,del=false;
+function typeLoop(){
+  const el=document.getElementById('typingText');
+  if(!el)return;
+  const t=texts[ti];
+  if(!del){el.textContent=t.slice(0,++ci);if(ci===t.length){del=true;setTimeout(typeLoop,1800);return;}}
+  else{el.textContent=t.slice(0,--ci);if(ci===0){del=false;ti=(ti+1)%texts.length;}}
+  setTimeout(typeLoop,del?60:100);
+}
+setTimeout(typeLoop,2600);
+
+// ===================== REVEAL ON SCROLL =====================
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');}});
+},{threshold:0.15});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ===================== SKILL BARS =====================
+const skillObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.skill-bar-fill').forEach(b=>{
+        b.style.width=b.dataset.w+'%';
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.about-right').forEach(el=>skillObs.observe(el));
+
+// ===================== GALLERY (Unsplash images) =====================
+const galleryItems=[
+  {img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0ODAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgNDgwIDIwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iYmciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwZDExMTciLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxNjFiMjIiLz48L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9InNjcmVlbiIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxZjI5MzciLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxMTE4MjciLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjQ4MCIgaGVpZ2h0PSIyMDAiIGZpbGw9InVybCgjYmcpIi8+CjwhLS0gTW9uaXRvciAtLT4KPHJlY3QgeD0iMTQwIiB5PSIyNSIgd2lkdGg9IjIwMCIgaGVpZ2h0PSIxMzAiIHJ4PSI4IiBmaWxsPSJ1cmwoI3NjcmVlbikiIHN0cm9rZT0iIzMwMzYzZCIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxyZWN0IHg9IjE0OCIgeT0iMzMiIHdpZHRoPSIxODQiIGhlaWdodD0iMTE0IiByeD0iNCIgZmlsbD0iIzBkMTExNyIvPgo8IS0tIENvZGUgbGluZXMgLS0+CjxyZWN0IHg9IjE1OCIgeT0iNDUiIHdpZHRoPSI0MCIgaGVpZ2h0PSI1IiByeD0iMiIgZmlsbD0iI2ZmN2I3MiIvPgo8cmVjdCB4PSIyMDQiIHk9IjQ1IiB3aWR0aD0iNjAiIGhlaWdodD0iNSIgcng9IjIiIGZpbGw9IiM3OWMwZmYiLz4KPHJlY3QgeD0iMjcwIiB5PSI0NSIgd2lkdGg9IjM1IiBoZWlnaHQ9IjUiIHJ4PSIyIiBmaWxsPSIjNTZkMzY0Ii8+CjxyZWN0IHg9IjE2NSIgeT0iNTciIHdpZHRoPSIyNSIgaGVpZ2h0PSI1IiByeD0iMiIgZmlsbD0iIzc5YzBmZiIvPgo8cmVjdCB4PSIxOTYiIHk9IjU3IiB3aWR0aD0iNTAiIGhlaWdodD0iNSIgcng9IjIiIGZpbGw9IiNlM2IzNDEiLz4KPHJlY3QgeD0iMjUyIiB5PSI1NyIgd2lkdGg9IjQwIiBoZWlnaHQ9IjUiIHJ4PSIyIiBmaWxsPSIjZmY3YjcyIi8+CjxyZWN0IHg9IjE1OCIgeT0iNjkiIHdpZHRoPSI1NSIgaGVpZ2h0PSI1IiByeD0iMiIgZmlsbD0iIzU2ZDM2NCIvPgo8cmVjdCB4PSIyMTkiIHk9IjY5IiB3aWR0aD0iMzAiIGhlaWdodD0iNSIgcng9IjIiIGZpbGw9IiM3OWMwZmYiLz4KPHJlY3QgeD0iMjU1IiB5PSI2OSIgd2lkdGg9IjQ1IiBoZWlnaHQ9IjUiIHJ4PSIyIiBmaWxsPSIjZmY3YjcyIi8+CjxyZWN0IHg9IjE2NSIgeT0iODEiIHdpZHRoPSIzNSIgaGVpZ2h0PSI1IiByeD0iMiIgZmlsbD0iI2UzYjM0MSIvPgo8cmVjdCB4PSIyMDYiIHk9IjgxIiB3aWR0aD0iNTUiIGhlaWdodD0iNSIgcng9IjIiIGZpbGw9IiM1NmQzNjQiLz4KPHJlY3QgeD0iMTU4IiB5PSI5MyIgd2lkdGg9IjIwIiBoZWlnaHQ9IjUiIHJ4PSIyIiBmaWxsPSIjNzljMGZmIi8+CjxyZWN0IHg9IjE4NCIgeT0iOTMiIHdpZHRoPSI2NSIgaGVpZ2h0PSI1IiByeD0iMiIgZmlsbD0iI2ZmN2I3MiIvPgo8cmVjdCB4PSIyNTUiIHk9IjkzIiB3aWR0aD0iNDAiIGhlaWdodD0iNSIgcng9IjIiIGZpbGw9IiM1NmQzNjQiLz4KPHJlY3QgeD0iMTY1IiB5PSIxMDUiIHdpZHRoPSI0NSIgaGVpZ2h0PSI1IiByeD0iMiIgZmlsbD0iIzc5YzBmZiIvPgo8cmVjdCB4PSIyMTYiIHk9IjEwNSIgd2lkdGg9IjMwIiBoZWlnaHQ9IjUiIHJ4PSIyIiBmaWxsPSIjZTNiMzQxIi8+CjwhLS0gQ3Vyc29yIGJsaW5rIC0tPgo8cmVjdCB4PSIxNTgiIHk9IjExOSIgd2lkdGg9IjgiIGhlaWdodD0iMTIiIHJ4PSIxIiBmaWxsPSIjNzljMGZmIiBvcGFjaXR5PSIwLjkiLz4KPCEtLSBTdGFuZCAtLT4KPHJlY3QgeD0iMjI1IiB5PSIxNTUiIHdpZHRoPSIzMCIgaGVpZ2h0PSIxNSIgcng9IjIiIGZpbGw9IiMzMDM2M2QiLz4KPHJlY3QgeD0iMjAwIiB5PSIxNjgiIHdpZHRoPSI4MCIgaGVpZ2h0PSI2IiByeD0iMyIgZmlsbD0iIzMwMzYzZCIvPgo8IS0tIEtleWJvYXJkIGhpbnQgLS0+CjxyZWN0IHg9IjE3NSIgeT0iMTc4IiB3aWR0aD0iMTMwIiBoZWlnaHQ9IjE2IiByeD0iNCIgZmlsbD0iIzFmMjkzNyIgc3Ryb2tlPSIjMzAzNjNkIiBzdHJva2Utd2lkdGg9IjEiLz4KPHJlY3QgeD0iMTgwIiB5PSIxODIiIHdpZHRoPSIxMiIgaGVpZ2h0PSI2IiByeD0iMSIgZmlsbD0iIzMwMzYzZCIvPgo8cmVjdCB4PSIxOTYiIHk9IjE4MiIgd2lkdGg9IjEyIiBoZWlnaHQ9IjYiIHJ4PSIxIiBmaWxsPSIjMzAzNjNkIi8+CjxyZWN0IHg9IjIxMiIgeT0iMTgyIiB3aWR0aD0iMTIiIGhlaWdodD0iNiIgcng9IjEiIGZpbGw9IiMzMDM2M2QiLz4KPHJlY3QgeD0iMjI4IiB5PSIxODIiIHdpZHRoPSI0MCIgaGVpZ2h0PSI2IiByeD0iMSIgZmlsbD0iIzMwMzYzZCIvPgo8cmVjdCB4PSIyNzIiIHk9IjE4MiIgd2lkdGg9IjEyIiBoZWlnaHQ9IjYiIHJ4PSIxIiBmaWxsPSIjMzAzNjNkIi8+CjxyZWN0IHg9IjI4OCIgeT0iMTgyIiB3aWR0aD0iMTIiIGhlaWdodD0iNiIgcng9IjEiIGZpbGw9IiMzMDM2M2QiLz4KPCEtLSBTdGFycyAtLT4KPGNpcmNsZSBjeD0iNTAiIGN5PSI0MCIgcj0iMS41IiBmaWxsPSIjNzljMGZmIiBvcGFjaXR5PSIwLjYiLz4KPGNpcmNsZSBjeD0iNDIwIiBjeT0iMzAiIHI9IjEiIGZpbGw9IiM1NmQzNjQiIG9wYWNpdHk9IjAuNSIvPgo8Y2lyY2xlIGN4PSI4MCIgY3k9IjE2MCIgcj0iMS41IiBmaWxsPSIjZmY3YjcyIiBvcGFjaXR5PSIwLjQiLz4KPGNpcmNsZSBjeD0iNDAwIiBjeT0iMTcwIiByPSIxIiBmaWxsPSIjZTNiMzQxIiBvcGFjaXR5PSIwLjUiLz4KPGNpcmNsZSBjeD0iMzAiIGN5PSIxMDAiIHI9IjEiIGZpbGw9IiM3OWMwZmYiIG9wYWNpdHk9IjAuNCIvPgo8Y2lyY2xlIGN4PSI0NTAiIGN5PSI5MCIgcj0iMS41IiBmaWxsPSIjNTZkMzY0IiBvcGFjaXR5PSIwLjQiLz4KPCEtLSBMYWJlbCAtLT4KPHRleHQgeD0iMjQwIiB5PSIxNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzc5YzBmZiIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIxMSIgb3BhY2l0eT0iMC44Ij7wn5K7IENvZGluZyBTZXR1cDwvdGV4dD4KPC9zdmc+',label:'💻 Coding Setup'},
+  {img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0ODAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgNDgwIDIwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iYmcyIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMGEwMDE1Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMTUwMDI1Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0ODAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2JnMikiLz4KPCEtLSBSR0IgZ2xvdyBlZmZlY3RzIC0tPgo8ZWxsaXBzZSBjeD0iMjQwIiBjeT0iMTAwIiByeD0iMjAwIiByeT0iOTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzdjM2FlZCIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjMiLz4KPGVsbGlwc2UgY3g9IjI0MCIgY3k9IjEwMCIgcng9IjE4MCIgcnk9Ijc1IiBmaWxsPSJub25lIiBzdHJva2U9IiM2ZDI4ZDkiIHN0cm9rZS13aWR0aD0iMSIgb3BhY2l0eT0iMC4yIi8+CjwhLS0gTW9uaXRvciB3aXRoIFJHQiAtLT4KPHJlY3QgeD0iMTMwIiB5PSIyMCIgd2lkdGg9IjIyMCIgaGVpZ2h0PSIxMzUiIHJ4PSIxMCIgZmlsbD0iIzFhMWEyZSIgc3Ryb2tlPSIjN2MzYWVkIiBzdHJva2Utd2lkdGg9IjIiLz4KPHJlY3QgeD0iMTQwIiB5PSIzMCIgd2lkdGg9IjIwMCIgaGVpZ2h0PSIxMTciIHJ4PSI2IiBmaWxsPSIjMGYwZjFhIi8+CjwhLS0gR2FtZSBzY3JlZW4gLSBGUFMgc3R5bGUgLS0+CjxyZWN0IHg9IjE0MCIgeT0iMzAiIHdpZHRoPSIyMDAiIGhlaWdodD0iMTE3IiByeD0iNiIgZmlsbD0iIzExMTgyNyIvPgo8cG9seWdvbiBwb2ludHM9IjI0MCw1MCAyMzAsODAgMjUwLDgwIiBmaWxsPSIjZWY0NDQ0Ii8+CjxjaXJjbGUgY3g9IjI0MCIgY3k9IjkwIiByPSIzIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB4PSIyMzciIHk9Ijc1IiB3aWR0aD0iNiIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB4PSIyMzMiIHk9Ijc5IiB3aWR0aD0iMTQiIGhlaWdodD0iMiIgZmlsbD0id2hpdGUiLz4KPCEtLSBIVUQgZWxlbWVudHMgLS0+CjxyZWN0IHg9IjE0OCIgeT0iMzgiIHdpZHRoPSI0MCIgaGVpZ2h0PSI2IiByeD0iMiIgZmlsbD0iIzIyYzU1ZSIgb3BhY2l0eT0iMC44Ii8+CjxyZWN0IHg9IjE0OCIgeT0iMzgiIHdpZHRoPSIyOCIgaGVpZ2h0PSI2IiByeD0iMiIgZmlsbD0iIzIyYzU1ZSIvPgo8dGV4dCB4PSIxNTIiIHk9IjQ0IiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSI1IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIj5IUCA3MCU8L3RleHQ+Cjx0ZXh0IHg9IjI4NSIgeT0iNDQiIGZpbGw9IiNmYmJmMjQiIGZvbnQtc2l6ZT0iNSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSI+U0NPUkU6OTg1MDwvdGV4dD4KPCEtLSBDb250cm9sbGVyIC0tPgo8ZWxsaXBzZSBjeD0iMjQwIiBjeT0iMTcwIiByeD0iNTUiIHJ5PSIyMiIgZmlsbD0iIzFmMjkzNyIgc3Ryb2tlPSIjN2MzYWVkIiBzdHJva2Utd2lkdGg9IjEuNSIvPgo8Y2lyY2xlIGN4PSIyMjAiIGN5PSIxNjciIHI9IjgiIGZpbGw9IiMxMTE4MjciIHN0cm9rZT0iIzM3NDE1MSIgc3Ryb2tlLXdpZHRoPSIxIi8+CjxjaXJjbGUgY3g9IjIxNyIgY3k9IjE2NSIgcj0iMiIgZmlsbD0iIzdjM2FlZCIvPgo8Y2lyY2xlIGN4PSIyMjMiIGN5PSIxNjUiIHI9IjIiIGZpbGw9IiM3YzNhZWQiLz4KPGNpcmNsZSBjeD0iMjIwIiBjeT0iMTYyIiByPSIyIiBmaWxsPSIjN2MzYWVkIi8+CjxjaXJjbGUgY3g9IjIyMCIgY3k9IjE2OCIgcj0iMiIgZmlsbD0iIzdjM2FlZCIvPgo8Y2lyY2xlIGN4PSIyNTciIGN5PSIxNjUiIHI9IjQiIGZpbGw9IiNlZjQ0NDQiIG9wYWNpdHk9IjAuOSIvPgo8Y2lyY2xlIGN4PSIyNjUiIGN5PSIxNjEiIHI9IjQiIGZpbGw9IiMyMmM1NWUiIG9wYWNpdHk9IjAuOSIvPgo8Y2lyY2xlIGN4PSIyNjUiIGN5PSIxNjkiIHI9IjQiIGZpbGw9IiMzYjgyZjYiIG9wYWNpdHk9IjAuOSIvPgo8Y2lyY2xlIGN4PSIyNTciIGN5PSIxNzMiIHI9IjQiIGZpbGw9IiNmYmJmMjQiIG9wYWNpdHk9IjAuOSIvPgo8IS0tIFJHQiBzdHJpcCB1bmRlciBtb25pdG9yIC0tPgo8cmVjdCB4PSIxMzAiIHk9IjE1NSIgd2lkdGg9IjIyMCIgaGVpZ2h0PSIzIiByeD0iMS41IiBmaWxsPSJ1cmwoI3JnYikiLz4KPGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJyZ2IiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjZWY0NDQ0Ii8+PHN0b3Agb2Zmc2V0PSIzMyUiIHN0b3AtY29sb3I9IiM3YzNhZWQiLz48c3RvcCBvZmZzZXQ9IjY2JSIgc3RvcC1jb2xvcj0iIzNiODJmNiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzIyYzU1ZSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8IS0tIFN0YXJzIC0tPgo8Y2lyY2xlIGN4PSI0MCIgY3k9IjMwIiByPSIxLjUiIGZpbGw9IiM3YzNhZWQiIG9wYWNpdHk9IjAuNyIvPgo8Y2lyY2xlIGN4PSI0NDAiIGN5PSI1MCIgcj0iMSIgZmlsbD0iIzNiODJmNiIgb3BhY2l0eT0iMC42Ii8+CjxjaXJjbGUgY3g9IjYwIiBjeT0iMTUwIiByPSIxLjUiIGZpbGw9IiNlZjQ0NDQiIG9wYWNpdHk9IjAuNSIvPgo8Y2lyY2xlIGN4PSI0MjAiIGN5PSIxNjAiIHI9IjEiIGZpbGw9IiMyMmM1NWUiIG9wYWNpdHk9IjAuNSIvPgo8dGV4dCB4PSIyNDAiIHk9IjEzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjYTc4YmZhIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjExIiBvcGFjaXR5PSIwLjkiPvCfjq4gR2FtaW5nIFNldHVwPC90ZXh0Pgo8L3N2Zz4=',label:'🎮 Gaming Setup'},
+  {img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0ODAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgNDgwIDIwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iYmczIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMGMxNDQ1Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMWUzYTVmIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0ODAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2JnMykiLz4KPCEtLSBCcm93c2VyIHdpbmRvdyAtLT4KPHJlY3QgeD0iODAiIHk9IjIwIiB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE2MCIgcng9IjEwIiBmaWxsPSIjMWUyOTNiIiBzdHJva2U9IiMzMzQxNTUiIHN0cm9rZS13aWR0aD0iMS41Ii8+CjwhLS0gQnJvd3NlciBiYXIgLS0+CjxyZWN0IHg9IjgwIiB5PSIyMCIgd2lkdGg9IjMyMCIgaGVpZ2h0PSIzMiIgcng9IjEwIiBmaWxsPSIjMzM0MTU1Ii8+CjxyZWN0IHg9IjgwIiB5PSI0MCIgd2lkdGg9IjMyMCIgaGVpZ2h0PSIxMiIgZmlsbD0iIzMzNDE1NSIvPgo8Y2lyY2xlIGN4PSIxMDAiIGN5PSIzNiIgcj0iNiIgZmlsbD0iI2VmNDQ0NCIgb3BhY2l0eT0iMC44Ii8+CjxjaXJjbGUgY3g9IjExOCIgY3k9IjM2IiByPSI2IiBmaWxsPSIjZmJiZjI0IiBvcGFjaXR5PSIwLjgiLz4KPGNpcmNsZSBjeD0iMTM2IiBjeT0iMzYiIHI9IjYiIGZpbGw9IiMyMmM1NWUiIG9wYWNpdHk9IjAuOCIvPgo8IS0tIFVSTCBiYXIgLS0+CjxyZWN0IHg9IjE1MiIgeT0iMjgiIHdpZHRoPSIyMTAiIGhlaWdodD0iMTYiIHJ4PSI4IiBmaWxsPSIjMWUyOTNiIi8+Cjx0ZXh0IHg9IjE2MiIgeT0iMzkiIGZpbGw9IiM5NGEzYjgiIGZvbnQtc2l6ZT0iNyIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSI+aHR0cHM6Ly9oYXJzaHdvcmxkLmRldjwvdGV4dD4KPCEtLSBXZWJzaXRlIGNvbnRlbnQgLS0+CjwhLS0gSGVybyBzZWN0aW9uIC0tPgo8cmVjdCB4PSI5MCIgeT0iNjIiIHdpZHRoPSIzMDAiIGhlaWdodD0iNTAiIHJ4PSI2IiBmaWxsPSIjMjU2M2ViIiBvcGFjaXR5PSIwLjgiLz4KPHJlY3QgeD0iMTYwIiB5PSI3MiIgd2lkdGg9IjE2MCIgaGVpZ2h0PSI4IiByeD0iNCIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuOSIvPgo8cmVjdCB4PSIxODUiIHk9Ijg1IiB3aWR0aD0iMTEwIiBoZWlnaHQ9IjUiIHJ4PSIyLjUiIGZpbGw9IndoaXRlIiBvcGFjaXR5PSIwLjUiLz4KPHJlY3QgeD0iMjAwIiB5PSI5NiIgd2lkdGg9IjgwIiBoZWlnaHQ9IjEwIiByeD0iNSIgZmlsbD0iI2ZiYmYyNCIvPgo8IS0tIENhcmRzIHJvdyAtLT4KPHJlY3QgeD0iOTAiIHk9IjEyMiIgd2lkdGg9IjkwIiBoZWlnaHQ9IjUwIiByeD0iNiIgZmlsbD0iIzFlM2E1ZiIgc3Ryb2tlPSIjM2I4MmY2IiBzdHJva2Utd2lkdGg9IjEiLz4KPHJlY3QgeD0iMTk1IiB5PSIxMjIiIHdpZHRoPSI5MCIgaGVpZ2h0PSI1MCIgcng9IjYiIGZpbGw9IiMxZTNhNWYiIHN0cm9rZT0iIzhiNWNmNiIgc3Ryb2tlLXdpZHRoPSIxIi8+CjxyZWN0IHg9IjMwMCIgeT0iMTIyIiB3aWR0aD0iOTAiIGhlaWdodD0iNTAiIHJ4PSI2IiBmaWxsPSIjMWUzYTVmIiBzdHJva2U9IiMyMmM1NWUiIHN0cm9rZS13aWR0aD0iMSIvPgo8cmVjdCB4PSI5OCIgeT0iMTMwIiB3aWR0aD0iNjAiIGhlaWdodD0iNCIgcng9IjIiIGZpbGw9IiMzYjgyZjYiIG9wYWNpdHk9IjAuOCIvPgo8cmVjdCB4PSI5OCIgeT0iMTM4IiB3aWR0aD0iNzQiIGhlaWdodD0iMyIgcng9IjEuNSIgZmlsbD0iIzk0YTNiOCIgb3BhY2l0eT0iMC42Ii8+CjxyZWN0IHg9Ijk4IiB5PSIxNDUiIHdpZHRoPSI1MCIgaGVpZ2h0PSIzIiByeD0iMS41IiBmaWxsPSIjOTRhM2I4IiBvcGFjaXR5PSIwLjYiLz4KPHJlY3QgeD0iMjAzIiB5PSIxMzAiIHdpZHRoPSI2MCIgaGVpZ2h0PSI0IiByeD0iMiIgZmlsbD0iIzhiNWNmNiIgb3BhY2l0eT0iMC44Ii8+CjxyZWN0IHg9IjIwMyIgeT0iMTM4IiB3aWR0aD0iNzQiIGhlaWdodD0iMyIgcng9IjEuNSIgZmlsbD0iIzk0YTNiOCIgb3BhY2l0eT0iMC42Ii8+CjxyZWN0IHg9IjMwOCIgeT0iMTMwIiB3aWR0aD0iNjAiIGhlaWdodD0iNCIgcng9IjIiIGZpbGw9IiMyMmM1NWUiIG9wYWNpdHk9IjAuOCIvPgo8dGV4dCB4PSIyNDAiIHk9IjEzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOTNjNWZkIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjExIiBvcGFjaXR5PSIwLjkiPvCfmoAgV2ViIFByb2plY3RzPC90ZXh0Pgo8L3N2Zz4=',label:'🚀 Web Projects'},
+  {img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0ODAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgNDgwIDIwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iYmc0IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZmRmMmY4Ii8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZmNlN2YzIi8+PC9saW5lYXJHcmFkaWVudD4KPGxpbmVhckdyYWRpZW50IGlkPSJjYXJkNCIgeDE9IjEzNWRlZyIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiNlYzQ4OTkiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM4YjVjZjYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjQ4MCIgaGVpZ2h0PSIyMDAiIGZpbGw9InVybCgjYmc0KSIvPgo8IS0tIERlc2lnbiB0b29scyBwYW5lbCBsZWZ0IC0tPgo8cmVjdCB4PSIzMCIgeT0iMzAiIHdpZHRoPSI1MCIgaGVpZ2h0PSIxNDAiIHJ4PSI4IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjZjlhOGQ0IiBzdHJva2Utd2lkdGg9IjEuNSIgb3BhY2l0eT0iMC45Ii8+CjxjaXJjbGUgY3g9IjU1IiBjeT0iNTAiIHI9IjgiIGZpbGw9IiNlYzQ4OTkiLz4KPGNpcmNsZSBjeD0iNTUiIGN5PSI3MCIgcj0iOCIgZmlsbD0iIzhiNWNmNiIvPgo8cmVjdCB4PSI0NSIgeT0iODQiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgcng9IjQiIGZpbGw9IiMzYjgyZjYiLz4KPHBvbHlnb24gcG9pbnRzPSI0NSwxMTggNjUsMTE4IDU1LDEwNCIgZmlsbD0iIzIyYzU1ZSIvPgo8cmVjdCB4PSI0MiIgeT0iMTI2IiB3aWR0aD0iMjYiIGhlaWdodD0iNiIgcng9IjMiIGZpbGw9IiNmYmJmMjQiLz4KPHJlY3QgeD0iNDIiIHk9IjEzOCIgd2lkdGg9IjI2IiBoZWlnaHQ9IjYiIHJ4PSIzIiBmaWxsPSIjZWY0NDQ0Ii8+CjwhLS0gTWFpbiBjYW52YXMgLS0+CjxyZWN0IHg9Ijk1IiB5PSIyNSIgd2lkdGg9IjI2MCIgaGVpZ2h0PSIxNTAiIHJ4PSIxMCIgZmlsbD0id2hpdGUiIHN0cm9rZT0iI2Y5YThkNCIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KPCEtLSBBcnRib2FyZCBsYWJlbCAtLT4KPHRleHQgeD0iMTA1IiB5PSI0MiIgZmlsbD0iI2VjNDg5OSIgZm9udC1zaXplPSI4IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9ImJvbGQiPkFydGJvYXJkIDE8L3RleHQ+CjwhLS0gVUkgZWxlbWVudHMgb24gY2FudmFzIC0tPgo8cmVjdCB4PSIxMDUiIHk9IjQ4IiB3aWR0aD0iMjQwIiBoZWlnaHQ9IjExNSIgcng9IjYiIGZpbGw9IiNmZGYyZjgiLz4KPCEtLSBBcHAgaGVhZGVyIC0tPgo8cmVjdCB4PSIxMDUiIHk9IjQ4IiB3aWR0aD0iMjQwIiBoZWlnaHQ9IjMwIiByeD0iNiIgZmlsbD0idXJsKCNjYXJkNCkiLz4KPHJlY3QgeD0iMTE1IiB5PSI1NyIgd2lkdGg9IjYwIiBoZWlnaHQ9IjYiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC45Ii8+CjxjaXJjbGUgY3g9IjMzMCIgY3k9IjYzIiByPSI3IiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC4zIi8+CjxjaXJjbGUgY3g9IjMxNiIgY3k9IjYzIiByPSI3IiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC4yIi8+CjwhLS0gUHJvZmlsZSBjYXJkIC0tPgo8cmVjdCB4PSIxMTUiIHk9Ijg4IiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjY4IiByeD0iOCIgZmlsbD0id2hpdGUiIHN0cm9rZT0iI2Y5YThkNCIgc3Ryb2tlLXdpZHRoPSIxIi8+CjxjaXJjbGUgY3g9IjE2NSIgY3k9IjEwOCIgcj0iMTUiIGZpbGw9InVybCgjY2FyZDQpIi8+CjxyZWN0IHg9IjEzNSIgeT0iMTI3IiB3aWR0aD0iNjAiIGhlaWdodD0iNSIgcng9IjIuNSIgZmlsbD0iIzFmMjkzNyIvPgo8cmVjdCB4PSIxNDUiIHk9IjEzNiIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQiIHJ4PSIyIiBmaWxsPSIjOWNhM2FmIi8+CjxyZWN0IHg9IjEzMCIgeT0iMTQ0IiB3aWR0aD0iNzAiIGhlaWdodD0iOCIgcng9IjQiIGZpbGw9InVybCgjY2FyZDQpIi8+CjwhLS0gU3RhdHMgY2FyZHMgLS0+CjxyZWN0IHg9IjIyNSIgeT0iODgiIHdpZHRoPSIxMTAiIGhlaWdodD0iMzAiIHJ4PSI2IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjYzRiNWZkIiBzdHJva2Utd2lkdGg9IjEiLz4KPHJlY3QgeD0iMjI1IiB5PSIxMjYiIHdpZHRoPSIxMTAiIGhlaWdodD0iMzAiIHJ4PSI2IiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjYTVmM2ZjIiBzdHJva2Utd2lkdGg9IjEiLz4KPHJlY3QgeD0iMjMzIiB5PSI5NiIgd2lkdGg9IjMwIiBoZWlnaHQ9IjQiIHJ4PSIyIiBmaWxsPSIjOGI1Y2Y2Ii8+CjxyZWN0IHg9IjIzMyIgeT0iMTM0IiB3aWR0aD0iMzAiIGhlaWdodD0iNCIgcng9IjIiIGZpbGw9IiMwNmI2ZDQiLz4KPCEtLSBDb2xvciBwYWxldHRlIHJpZ2h0IC0tPgo8cmVjdCB4PSIzNzAiIHk9IjMwIiB3aWR0aD0iMzUiIGhlaWdodD0iMTQwIiByeD0iOCIgZmlsbD0id2hpdGUiIHN0cm9rZT0iI2Y5YThkNCIgc3Ryb2tlLXdpZHRoPSIxLjUiIG9wYWNpdHk9IjAuOSIvPgo8cmVjdCB4PSIzNzciIHk9IjQyIiB3aWR0aD0iMjEiIGhlaWdodD0iMjEiIHJ4PSI0IiBmaWxsPSIjZWM0ODk5Ii8+CjxyZWN0IHg9IjM3NyIgeT0iNjgiIHdpZHRoPSIyMSIgaGVpZ2h0PSIyMSIgcng9IjQiIGZpbGw9IiM4YjVjZjYiLz4KPHJlY3QgeD0iMzc3IiB5PSI5NCIgd2lkdGg9IjIxIiBoZWlnaHQ9IjIxIiByeD0iNCIgZmlsbD0iIzNiODJmNiIvPgo8cmVjdCB4PSIzNzciIHk9IjEyMCIgd2lkdGg9IjIxIiBoZWlnaHQ9IjIxIiByeD0iNCIgZmlsbD0iIzIyYzU1ZSIvPgo8cmVjdCB4PSIzNzciIHk9IjE0NiIgd2lkdGg9IjIxIiBoZWlnaHQ9IjIxIiByeD0iNCIgZmlsbD0iI2ZiYmYyNCIvPgo8dGV4dCB4PSIyNDAiIHk9IjEzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZWM0ODk5IiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9ImJvbGQiIG9wYWNpdHk9IjAuOSI+8J+OqCBVSSBEZXNpZ25zPC90ZXh0Pgo8L3N2Zz4=',label:'🎨 UI Designs'},
+  {img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0ODAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgNDgwIDIwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iYmc1IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMGYxNzJhIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMWUyOTNiIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSI0ODAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2JnNSkiLz4KPCEtLSBOZXVyYWwgbmV0d29yayBub2RlcyAtLT4KPCEtLSBMYXllciAxIC0tPgo8Y2lyY2xlIGN4PSI4MCIgY3k9IjYwIiByPSIxNCIgZmlsbD0iIzFlM2E1ZiIgc3Ryb2tlPSIjM2I4MmY2IiBzdHJva2Utd2lkdGg9IjIiLz4KPGNpcmNsZSBjeD0iODAiIGN5PSIxMDAiIHI9IjE0IiBmaWxsPSIjMWUzYTVmIiBzdHJva2U9IiMzYjgyZjYiIHN0cm9rZS13aWR0aD0iMiIvPgo8Y2lyY2xlIGN4PSI4MCIgY3k9IjE0MCIgcj0iMTQiIGZpbGw9IiMxZTNhNWYiIHN0cm9rZT0iIzNiODJmNiIgc3Ryb2tlLXdpZHRoPSIyIi8+CjwhLS0gTGF5ZXIgMiAtLT4KPGNpcmNsZSBjeD0iMTg1IiBjeT0iNDUiIHI9IjE0IiBmaWxsPSIjMWUzYTVmIiBzdHJva2U9IiM4YjVjZjYiIHN0cm9rZS13aWR0aD0iMiIvPgo8Y2lyY2xlIGN4PSIxODUiIGN5PSI4NSIgcj0iMTQiIGZpbGw9IiMzMTJlODEiIHN0cm9rZT0iIzhiNWNmNiIgc3Ryb2tlLXdpZHRoPSIyLjUiLz4KPGNpcmNsZSBjeD0iMTg1IiBjeT0iMTI1IiByPSIxNCIgZmlsbD0iIzFlM2E1ZiIgc3Ryb2tlPSIjOGI1Y2Y2IiBzdHJva2Utd2lkdGg9IjIiLz4KPGNpcmNsZSBjeD0iMTg1IiBjeT0iMTY1IiByPSIxNCIgZmlsbD0iIzFlM2E1ZiIgc3Ryb2tlPSIjOGI1Y2Y2IiBzdHJva2Utd2lkdGg9IjIiLz4KPCEtLSBMYXllciAzIC0tPgo8Y2lyY2xlIGN4PSIyOTUiIGN5PSI2NSIgcj0iMTQiIGZpbGw9IiMxZTNhNWYiIHN0cm9rZT0iIzZkMjhkOSIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxjaXJjbGUgY3g9IjI5NSIgY3k9IjEwNSIgcj0iMTQiIGZpbGw9IiMzMTJlODEiIHN0cm9rZT0iIzZkMjhkOSIgc3Ryb2tlLXdpZHRoPSIyLjUiLz4KPGNpcmNsZSBjeD0iMjk1IiBjeT0iMTQ1IiByPSIxNCIgZmlsbD0iIzFlM2E1ZiIgc3Ryb2tlPSIjNmQyOGQ5IiBzdHJva2Utd2lkdGg9IjIiLz4KPCEtLSBPdXRwdXQgLS0+CjxjaXJjbGUgY3g9IjQwMCIgY3k9IjEwMCIgcj0iMTgiIGZpbGw9IiM0YzFkOTUiIHN0cm9rZT0iI2E3OGJmYSIgc3Ryb2tlLXdpZHRoPSIyLjUiLz4KPCEtLSBDb25uZWN0aW9ucyBMMS0+TDIgLS0+CjxsaW5lIHgxPSI5NCIgeTE9IjYwIiB4Mj0iMTcxIiB5Mj0iNDUiIHN0cm9rZT0iIzNiODJmNiIgc3Ryb2tlLXdpZHRoPSIwLjgiIG9wYWNpdHk9IjAuNCIvPgo8bGluZSB4MT0iOTQiIHkxPSI2MCIgeDI9IjE3MSIgeTI9Ijg1IiBzdHJva2U9IiMzYjgyZjYiIHN0cm9rZS13aWR0aD0iMS4yIiBvcGFjaXR5PSIwLjciLz4KPGxpbmUgeDE9Ijk0IiB5MT0iMTAwIiB4Mj0iMTcxIiB5Mj0iODUiIHN0cm9rZT0iIzNiODJmNiIgc3Ryb2tlLXdpZHRoPSIxLjUiIG9wYWNpdHk9IjAuOSIvPgo8bGluZSB4MT0iOTQiIHkxPSIxMDAiIHgyPSIxNzEiIHkyPSIxMjUiIHN0cm9rZT0iIzNiODJmNiIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjYiLz4KPGxpbmUgeDE9Ijk0IiB5MT0iMTQwIiB4Mj0iMTcxIiB5Mj0iMTI1IiBzdHJva2U9IiMzYjgyZjYiIHN0cm9rZS13aWR0aD0iMS4yIiBvcGFjaXR5PSIwLjciLz4KPGxpbmUgeDE9Ijk0IiB5MT0iMTQwIiB4Mj0iMTcxIiB5Mj0iMTY1IiBzdHJva2U9IiMzYjgyZjYiIHN0cm9rZS13aWR0aD0iMC44IiBvcGFjaXR5PSIwLjQiLz4KPCEtLSBDb25uZWN0aW9ucyBMMi0+TDMgLS0+CjxsaW5lIHgxPSIxOTkiIHkxPSI0NSIgeDI9IjI4MSIgeTI9IjY1IiBzdHJva2U9IiM4YjVjZjYiIHN0cm9rZS13aWR0aD0iMC44IiBvcGFjaXR5PSIwLjUiLz4KPGxpbmUgeDE9IjE5OSIgeTE9Ijg1IiB4Mj0iMjgxIiB5Mj0iNjUiIHN0cm9rZT0iIzhiNWNmNiIgc3Ryb2tlLXdpZHRoPSIxLjUiIG9wYWNpdHk9IjAuOSIvPgo8bGluZSB4MT0iMTk5IiB5MT0iODUiIHgyPSIyODEiIHkyPSIxMDUiIHN0cm9rZT0iIzhiNWNmNiIgc3Ryb2tlLXdpZHRoPSIyIiBvcGFjaXR5PSIxIi8+CjxsaW5lIHgxPSIxOTkiIHkxPSIxMjUiIHgyPSIyODEiIHkyPSIxMDUiIHN0cm9rZT0iIzhiNWNmNiIgc3Ryb2tlLXdpZHRoPSIxLjIiIG9wYWNpdHk9IjAuNyIvPgo8bGluZSB4MT0iMTk5IiB5MT0iMTY1IiB4Mj0iMjgxIiB5Mj0iMTQ1IiBzdHJva2U9IiM4YjVjZjYiIHN0cm9rZS13aWR0aD0iMC44IiBvcGFjaXR5PSIwLjQiLz4KPCEtLSBDb25uZWN0aW9ucyBMMy0+T3V0IC0tPgo8bGluZSB4MT0iMzA5IiB5MT0iNjUiIHgyPSIzODIiIHkyPSIxMDAiIHN0cm9rZT0iI2E3OGJmYSIgc3Ryb2tlLXdpZHRoPSIxIiBvcGFjaXR5PSIwLjUiLz4KPGxpbmUgeDE9IjMwOSIgeTE9IjEwNSIgeDI9IjM4MiIgeTI9IjEwMCIgc3Ryb2tlPSIjYTc4YmZhIiBzdHJva2Utd2lkdGg9IjIiIG9wYWNpdHk9IjEiLz4KPGxpbmUgeDE9IjMwOSIgeTE9IjE0NSIgeDI9IjM4MiIgeTI9IjEwMCIgc3Ryb2tlPSIjYTc4YmZhIiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuNSIvPgo8IS0tIE5vZGUgbGFiZWxzIC0tPgo8dGV4dCB4PSI4MCIgeT0iNjQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5M2M1ZmQiIGZvbnQtc2l6ZT0iOCIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSI+eDE8L3RleHQ+Cjx0ZXh0IHg9IjgwIiB5PSIxMDQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5M2M1ZmQiIGZvbnQtc2l6ZT0iOCIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSI+eDI8L3RleHQ+Cjx0ZXh0IHg9IjgwIiB5PSIxNDQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM5M2M1ZmQiIGZvbnQtc2l6ZT0iOCIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSI+eDM8L3RleHQ+Cjx0ZXh0IHg9IjQwMCIgeT0iMTA0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjYzRiNWZkIiBmb250LXNpemU9IjkiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiPk9VVDwvdGV4dD4KPCEtLSBGbG9hdGluZyBtYXRoIC0tPgo8dGV4dCB4PSI0MzAiIHk9IjQwIiBmaWxsPSIjNjBhNWZhIiBmb250LXNpemU9IjEwIiBvcGFjaXR5PSIwLjYiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiPuKIkTwvdGV4dD4KPHRleHQgeD0iMjAiIHk9IjMwIiBmaWxsPSIjYTc4YmZhIiBmb250LXNpemU9IjkiIG9wYWNpdHk9IjAuNSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSI+TyhuwrIpPC90ZXh0Pgo8dGV4dCB4PSI0NDAiIHk9IjE3MCIgZmlsbD0iIzM0ZDM5OSIgZm9udC1zaXplPSI4IiBvcGFjaXR5PSIwLjUiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiPmlmKG4pPC90ZXh0Pgo8dGV4dCB4PSIyNDAiIHk9IjEzIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOTNjNWZkIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjExIiBvcGFjaXR5PSIwLjkiPvCfp6AgUHJvYmxlbSBTb2x2aW5nPC90ZXh0Pgo8L3N2Zz4=',label:'🧠 Problem Solving'},
+  {img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0ODAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgNDgwIDIwMCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0iYmc2IiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMWEwYTAwIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMmQxNTAwIi8+PC9saW5lYXJHcmFkaWVudD4KPGxpbmVhckdyYWRpZW50IGlkPSJnb2xkIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6I2ZkZTY4YSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I2Q5NzcwNiIvPjwvbGluZWFyR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0ic2lsdmVyIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6I2UyZThmMCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6Izk0YTNiOCIvPjwvbGluZWFyR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0iYnJvbnplIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjAlIiB5Mj0iMTAwJSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3R5bGU9InN0b3AtY29sb3I6I2ZlZDdhYSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3R5bGU9InN0b3AtY29sb3I6I2MyNDEwYyIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgo8cmVjdCB3aWR0aD0iNDgwIiBoZWlnaHQ9IjIwMCIgZmlsbD0idXJsKCNiZzYpIi8+CjwhLS0gU3BhcmtsZXMgLS0+Cjx0ZXh0IHg9IjUwIiB5PSI0MCIgZm9udC1zaXplPSIxNCIgb3BhY2l0eT0iMC42Ij7inKg8L3RleHQ+Cjx0ZXh0IHg9IjQxMCIgeT0iMzUiIGZvbnQtc2l6ZT0iMTIiIG9wYWNpdHk9IjAuNSI+4q2QPC90ZXh0Pgo8dGV4dCB4PSIzMCIgeT0iMTYwIiBmb250LXNpemU9IjEwIiBvcGFjaXR5PSIwLjQiPvCfjJ88L3RleHQ+Cjx0ZXh0IHg9IjQzMCIgeT0iMTcwIiBmb250LXNpemU9IjEyIiBvcGFjaXR5PSIwLjUiPuKcqDwvdGV4dD4KPCEtLSBHb2xkIFRyb3BoeSAoY2VudGVyLCB0YWxsZXN0KSAtLT4KPGVsbGlwc2UgY3g9IjI0MCIgY3k9IjE1NSIgcng9IjM1IiByeT0iNiIgZmlsbD0iIzkyNDAwZSIgb3BhY2l0eT0iMC41Ii8+CjxyZWN0IHg9IjIyNSIgeT0iMTQwIiB3aWR0aD0iMzAiIGhlaWdodD0iMTUiIHJ4PSIzIiBmaWxsPSJ1cmwoI2dvbGQpIi8+CjxyZWN0IHg9IjIxOCIgeT0iMTM1IiB3aWR0aD0iNDQiIGhlaWdodD0iOCIgcng9IjQiIGZpbGw9InVybCgjZ29sZCkiLz4KPCEtLSBDdXAgLS0+CjxwYXRoIGQ9Ik0yMDUsODAgUTIwMCwxMTUgMjE1LDEzMCBRMjMwLDE0MCAyNDAsMTQwIFEyNTAsMTQwIDI2NSwxMzAgUTI4MCwxMTUgMjc1LDgwIFoiIGZpbGw9InVybCgjZ29sZCkiIHN0cm9rZT0iI2Q5NzcwNiIgc3Ryb2tlLXdpZHRoPSIxIi8+CjwhLS0gQ3VwIGhhbmRsZXMgLS0+CjxwYXRoIGQ9Ik0yMDUsODUgUTE4NSw4NSAxODUsMTAwIFExODUsMTE1IDIwNSwxMTUiIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCNnb2xkKSIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPHBhdGggZD0iTTI3NSw4NSBRMjk1LDg1IDI5NSwxMDAgUTI5NSwxMTUgMjc1LDExNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dvbGQpIiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8IS0tIFN0YXIgb24gY3VwIC0tPgo8dGV4dCB4PSIyMzAiIHk9IjExNSIgZm9udC1zaXplPSIyMCI+4q2QPC90ZXh0Pgo8IS0tIFNpbHZlciBUcm9waHkgKGxlZnQpIC0tPgo8cmVjdCB4PSI5MCIgeT0iMTQ4IiB3aWR0aD0iMjIiIGhlaWdodD0iMTIiIHJ4PSIyIiBmaWxsPSJ1cmwoI3NpbHZlcikiLz4KPHJlY3QgeD0iODYiIHk9IjE0NCIgd2lkdGg9IjMwIiBoZWlnaHQ9IjYiIHJ4PSIzIiBmaWxsPSJ1cmwoI3NpbHZlcikiLz4KPHBhdGggZD0iTTc2LDk1IFE3MywxMTggODMsMTI4IFE5MSwxMzUgMTAxLDEzNSBRMTExLDEzNSAxMTksMTI4IFExMjksMTE4IDEyNiw5NSBaIiBmaWxsPSJ1cmwoI3NpbHZlcikiLz4KPHBhdGggZD0iTTc2LDk4IFE2NSw5OCA2NSwxMTAgUTY1LDEyMiA3NiwxMjIiIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCNzaWx2ZXIpIiBzdHJva2Utd2lkdGg9IjQiLz4KPHBhdGggZD0iTTEyNiw5OCBRMTM3LDk4IDEzNywxMTAgUTEzNywxMjIgMTI2LDEyMiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI3NpbHZlcikiIHN0cm9rZS13aWR0aD0iNCIvPgo8dGV4dCB4PSI5MyIgeT0iMTIyIiBmb250LXNpemU9IjE0Ij7wn6WIPC90ZXh0Pgo8IS0tIEJyb256ZSBUcm9waHkgKHJpZ2h0KSAtLT4KPHJlY3QgeD0iMzY4IiB5PSIxNTIiIHdpZHRoPSIyMiIgaGVpZ2h0PSIxMiIgcng9IjIiIGZpbGw9InVybCgjYnJvbnplKSIvPgo8cmVjdCB4PSIzNjQiIHk9IjE0OCIgd2lkdGg9IjMwIiBoZWlnaHQ9IjYiIHJ4PSIzIiBmaWxsPSJ1cmwoI2Jyb256ZSkiLz4KPHBhdGggZD0iTTM1NCwxMDAgUTM1MSwxMjIgMzYxLDEzMSBRMzY5LDEzOCAzNzksMTM4IFEzODksMTM4IDM5NywxMzEgUTQwNywxMjIgNDA0LDEwMCBaIiBmaWxsPSJ1cmwoI2Jyb256ZSkiLz4KPHBhdGggZD0iTTM1NCwxMDMgUTM0MywxMDMgMzQzLDExMyBRMzQzLDEyMyAzNTQsMTIzIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjYnJvbnplKSIgc3Ryb2tlLXdpZHRoPSI0Ii8+CjxwYXRoIGQ9Ik00MDQsMTAzIFE0MTUsMTAzIDQxNSwxMTMgUTQxNSwxMjMgNDA0LDEyMyIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2Jyb256ZSkiIHN0cm9rZS13aWR0aD0iNCIvPgo8dGV4dCB4PSIzNzEiIHk9IjEyNiIgZm9udC1zaXplPSIxNCI+8J+liTwvdGV4dD4KPCEtLSBQb2RpdW0gLS0+CjxyZWN0IHg9Ijc1IiB5PSIxNjIiIHdpZHRoPSI1MCIgaGVpZ2h0PSIyNSIgcng9IjQiIGZpbGw9IiM5MjQwMGUiIG9wYWNpdHk9IjAuNyIvPgo8cmVjdCB4PSIyMTAiIHk9IjE1NSIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMyIiByeD0iNCIgZmlsbD0iIzkyNDAwZSIvPgo8cmVjdCB4PSIzNTUiIHk9IjE2NSIgd2lkdGg9IjUwIiBoZWlnaHQ9IjIyIiByeD0iNCIgZmlsbD0iIzkyNDAwZSIgb3BhY2l0eT0iMC42Ii8+Cjx0ZXh0IHg9Ijk4IiB5PSIxNzgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZGU2OGEiIGZvbnQtc2l6ZT0iMTAiIGZvbnQtd2VpZ2h0PSJib2xkIj4ybmQ8L3RleHQ+Cjx0ZXh0IHg9IjI0MCIgeT0iMTcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmRlNjhhIiBmb250LXNpemU9IjExIiBmb250LXdlaWdodD0iYm9sZCI+MXN0PC90ZXh0Pgo8dGV4dCB4PSIzODAiIHk9IjE4MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZkZTY4YSIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9ImJvbGQiPjNyZDwvdGV4dD4KPHRleHQgeD0iMjQwIiB5PSIxMyIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZkZTY4YSIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIxMSIgb3BhY2l0eT0iMC45Ij7wn4+GIEFjaGlldmVtZW50czwvdGV4dD4KPC9zdmc+',label:'🏆 Achievements'},
+];
+const gg=document.getElementById('galleryGrid');
+galleryItems.forEach(item=>{
+  gg.innerHTML+=`<div class="gallery-card"><img src="${item.img}" alt="${item.label}" loading="lazy"><div class="gallery-label">${item.label}</div></div>`;
+});
+
+// ===================== STATS COUNTER =====================
+const targets=[1240,32,500,18,320,50000];
+const ids=['count1','count2','count3','count4','count5','count6'];
+const statObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      ids.forEach((id,i)=>{
+        let c=0;const t=targets[i];const step=Math.ceil(t/60);
+        const int=setInterval(()=>{c=Math.min(c+step,t);document.getElementById(id).textContent=c;if(c>=t)clearInterval(int);},30);
+      });
+      statObs.disconnect();
+    }
+  });
+},{threshold:0.3});
+statObs.observe(document.getElementById('stats'));
+
+// ===================== GUESS NUMBER =====================
+let gNum=Math.floor(Math.random()*100)+1,gTries=7;
+function guessGame(){
+  const v=parseInt(document.getElementById('guessInput').value);
+  if(!v||v<1||v>100){document.getElementById('guessResult').textContent='1 se 100 ke beech number daalo!';return;}
+  gTries--;
+  if(v===gNum){document.getElementById('guessResult').textContent='🎉 Correct! You won!';document.getElementById('guessAttempts').textContent='Tries left: '+gTries;}
+  else if(gTries===0){document.getElementById('guessResult').textContent='😢 Game Over! Number tha: '+gNum;resetGuess();}
+  else{document.getElementById('guessResult').textContent=(v<gNum?'📈 Aur bada!':'📉 Aur chota!');document.getElementById('guessAttempts').textContent='Tries left: '+gTries;}
+}
+function resetGuess(){gNum=Math.floor(Math.random()*100)+1;gTries=7;document.getElementById('guessResult').textContent='';document.getElementById('guessAttempts').textContent='';document.getElementById('guessInput').value='';}
+
+// ===================== RPS =====================
+let rpsW=0,rpsL=0,rpsD=0;
+function rps(p){
+  const c=['rock','paper','scissors'][Math.floor(Math.random()*3)];
+  const em={rock:'✊',paper:'✋',scissors:'✌'};
+  let res='';
+  if(p===c){res='🤝 Draw!';rpsD++;}
+  else if((p==='rock'&&c==='scissors')||(p==='paper'&&c==='rock')||(p==='scissors'&&c==='paper')){res='🎉 You Win!';rpsW++;}
+  else{res='😢 You Lose!';rpsL++;}
+  document.getElementById('rpsResult').textContent=`You: ${em[p]} vs CPU: ${em[c]} → ${res}`;
+  document.getElementById('rpsScore').textContent=`Win: ${rpsW} | Lose: ${rpsL} | Draw: ${rpsD}`;
+}
+
+// ===================== MEMORY =====================
+let memFlipped=[],memMatched=0,memMoves=0,memLock=false;
+function initMemory(){
+  const emojis=['🎮','🚀','💻','🎨','🏆','⚡','🎯','🌟'];
+  let cards=[...emojis,...emojis].sort(()=>Math.random()-.5);
+  memFlipped=[];memMatched=0;memMoves=0;memLock=false;
+  document.getElementById('memScore').textContent='Moves: 0 | Matched: 0/8';
+  const g=document.getElementById('memGrid');
+  g.innerHTML='';
+  cards.forEach((e,i)=>{
+    const d=document.createElement('div');
+    d.className='mem-card';d.dataset.val=e;d.dataset.idx=i;
+    d.innerHTML=`<span class="back">?</span><span class="front">${e}</span>`;
+    d.addEventListener('click',memClick);
+    g.appendChild(d);
+  });
+}
+function memClick(){
+  if(memLock||this.classList.contains('flipped')||this.classList.contains('matched'))return;
+  this.classList.add('flipped');memFlipped.push(this);
+  if(memFlipped.length===2){
+    memLock=true;memMoves++;
+    if(memFlipped[0].dataset.val===memFlipped[1].dataset.val){
+      memFlipped.forEach(c=>c.classList.add('matched'));memMatched++;
+      memFlipped=[];memLock=false;
+      document.getElementById('memScore').textContent=`Moves: ${memMoves} | Matched: ${memMatched}/8`;
+      if(memMatched===8)setTimeout(()=>alert('🎉 You matched all! Moves: '+memMoves),200);
+    }else{
+      setTimeout(()=>{memFlipped.forEach(c=>c.classList.remove('flipped'));memFlipped=[];memLock=false;
+      document.getElementById('memScore').textContent=`Moves: ${memMoves} | Matched: ${memMatched}/8`;},900);
+    }
+  }
+}
+initMemory();
+
+// ===================== SNAKE =====================
+const sc=document.getElementById('snakeCanvas'),sctx=sc.getContext('2d');
+let snake=[{x:100,y:90}],sDir={x:10,y:0},sFood={x:50,y:50},sScore=0,sLoop=null,sRunning=false;
+function drawSnake(){
+  sctx.fillStyle='#0d0d1a';sctx.fillRect(0,0,200,180);
+  sctx.fillStyle='#ff5252';sctx.beginPath();sctx.arc(sFood.x+5,sFood.y+5,5,0,Math.PI*2);sctx.fill();
+  snake.forEach((s,i)=>{
+    sctx.fillStyle=i===0?'#00e676':'#4CAF50';
+    sctx.beginPath();sctx.roundRect(s.x,s.y,9,9,3);sctx.fill();
+  });
+}
+function stepSnake(){
+  const head={x:snake[0].x+sDir.x,y:snake[0].y+sDir.y};
+  if(head.x<0||head.x>=200||head.y<0||head.y>=180||snake.some(s=>s.x===head.x&&s.y===head.y)){stopSnake();alert('💀 Game Over! Score: '+sScore);return;}
+  snake.unshift(head);
+  if(head.x===sFood.x&&head.y===sFood.y){sScore++;document.getElementById('snakeScore').textContent='Score: '+sScore;sFood={x:Math.floor(Math.random()*20)*10,y:Math.floor(Math.random()*18)*10};}
+  else snake.pop();
+  drawSnake();
+}
+function startSnake(){if(sRunning)return;snake=[{x:100,y:90}];sDir={x:10,y:0};sScore=0;sRunning=true;document.getElementById('snakeScore').textContent='Score: 0';sLoop=setInterval(stepSnake,130);}
+function stopSnake(){clearInterval(sLoop);sRunning=false;}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowUp'&&sDir.y===0)sDir={x:0,y:-10};
+  else if(e.key==='ArrowDown'&&sDir.y===0)sDir={x:0,y:10};
+  else if(e.key==='ArrowLeft'&&sDir.x===0)sDir={x:-10,y:0};
+  else if(e.key==='ArrowRight'&&sDir.x===0)sDir={x:10,y:0};
+});
+function snakeMove(dir){
+  if(dir==='up'&&sDir.y===0)sDir={x:0,y:-10};
+  else if(dir==='down'&&sDir.y===0)sDir={x:0,y:10};
+  else if(dir==='left'&&sDir.x===0)sDir={x:-10,y:0};
+  else if(dir==='right'&&sDir.x===0)sDir={x:10,y:0};
+}
+drawSnake();
+
+// ===================== QUIZ =====================
+const quizData=[
+  {q:'HTML full form?',opts:['HyperText Markup Language','High Text Machine Language','Hyper Transfer Markup Logic','None'],ans:0},
+  {q:'CSS stands for?',opts:['Cascading Style Sheets','Computer Style System','Creative Style Syntax','Coded Style Sheets'],ans:0},
+  {q:'Which is NOT a JS framework?',opts:['React','Angular','Django','Vue'],ans:2},
+  {q:'<div> is a ___ element?',opts:['Inline','Block','Flex','Grid'],ans:1},
+  {q:'Python was created by?',opts:['Dennis Ritchie','Guido van Rossum','Linus Torvalds','Bill Gates'],ans:1},
+];
+let qIdx=0,qScore=0;
+function renderQuiz(){
+  const qa=document.getElementById('quizArea');
+  if(qIdx>=quizData.length){qa.innerHTML=`<p style="font-weight:700;text-align:center;">🎉 Done! Score: ${qScore}/${quizData.length}</p><button onclick="qIdx=0;qScore=0;document.getElementById('quizScore').textContent='Score: 0/5';renderQuiz()">🔄 Retry</button>`;return;}
+  const q=quizData[qIdx];
+  qa.innerHTML=`<p style="font-weight:700;font-size:.88rem;margin-bottom:8px;">${qIdx+1}. ${q.q}</p>`+
+    q.opts.map((o,i)=>`<button class="quiz-option" onclick="answerQuiz(this,${i},${q.ans})">${o}</button>`).join('');
+}
+function answerQuiz(btn,chosen,correct){
+  document.querySelectorAll('.quiz-option').forEach(b=>b.disabled=true);
+  btn.classList.add(chosen===correct?'correct':'wrong');
+  if(chosen===correct){qScore++;document.getElementById('quizScore').textContent=`Score: ${qScore}/5`;}
+  else document.querySelectorAll('.quiz-option')[correct].classList.add('correct');
+  setTimeout(()=>{qIdx++;renderQuiz();},1000);
+}
+renderQuiz();
+
+// ===================== REACTION TEST =====================
+let rState='idle',rStart=0,rTimeout=null;
+const rBox=document.getElementById('reactionBox');
+function reactionClick(){
+  if(rState==='idle'){rState='waiting';rBox.style.background='#ffeb3b';rBox.style.color='#333';rBox.textContent='Wait for GREEN...';
+    rTimeout=setTimeout(()=>{rState='ready';rStart=Date.now();rBox.style.background='#4CAF50';rBox.style.color='white';rBox.textContent='CLICK NOW! ⚡';},Math.random()*3000+1000);}
+  else if(rState==='waiting'){clearTimeout(rTimeout);rState='idle';rBox.style.background='#f44336';rBox.style.color='white';rBox.textContent='Too early! Try again.';setTimeout(()=>{rBox.style.background='#e8e8e8';rBox.style.color='#333';rBox.textContent='Click to Start';},1200);}
+  else if(rState==='ready'){const t=Date.now()-rStart;rState='idle';rBox.style.background='#e8e8e8';rBox.style.color='#333';rBox.textContent='Click to Start';
+    document.getElementById('reactionResult').textContent=`⚡ ${t}ms! ${t<200?'🚀 Superhuman!':t<300?'⚡ Excellent!':t<500?'👍 Good!':'🐢 Practice more!'}`;}
+}
+
+// ===================== MATH CHALLENGE =====================
+let mathA=0,mathB=0,mathOp='',mathScore=0,mathStreak=0;
+function newMath(){
+  const ops=['+','-','×'];mathOp=ops[Math.floor(Math.random()*3)];
+  mathA=Math.floor(Math.random()*20)+1;mathB=Math.floor(Math.random()*20)+1;
+  if(mathOp==='-'&&mathB>mathA){let t=mathA;mathA=mathB;mathB=t;}
+  document.getElementById('mathQuestion').textContent=`${mathA} ${mathOp} ${mathB} = ?`;
+  document.getElementById('mathInput').value='';document.getElementById('mathResult').textContent='';
+}
+function checkMath(){
+  const v=parseInt(document.getElementById('mathInput').value);
+  const ans=mathOp==='+'?mathA+mathB:mathOp==='-'?mathA-mathB:mathA*mathB;
+  if(v===ans){mathScore++;mathStreak++;document.getElementById('mathResult').textContent='✅ Correct! +1';newMath();}
+  else{mathStreak=0;document.getElementById('mathResult').textContent=`❌ Wrong! Answer: ${ans}`;}
+  document.getElementById('mathScore').textContent=`Score: ${mathScore} | Streak: ${mathStreak}`;
+}
+newMath();
+
+// ===================== WORD GUESS =====================
+const words4=['CODE','GAME','PLAY','HACK','DART','JAVA','HTML','LOOP','DATA','TYPE'];
+let wWord=words4[Math.floor(Math.random()*words4.length)],wRow=0,wGrid=[];
+function initWordGrid(){
+  const g=document.getElementById('wordGrid');g.innerHTML='';wGrid=[];
+  for(let r=0;r<6;r++){
+    const row=document.createElement('div');row.className='word-row';
+    const tiles=[];
+    for(let c=0;c<4;c++){const t=document.createElement('div');t.className='word-tile';t.textContent='';row.appendChild(t);tiles.push(t);}
+    g.appendChild(row);wGrid.push(tiles);
+  }
+}
+function submitWord(){
+  const inp=document.getElementById('wordInput').value.toUpperCase().trim();
+  if(inp.length!==4){document.getElementById('wordResult').textContent='4 letters daalo!';return;}
+  const tiles=wGrid[wRow];
+  for(let i=0;i<4;i++){
+    tiles[i].textContent=inp[i];
+    if(inp[i]===wWord[i])tiles[i].classList.add('correct');
+    else if(wWord.includes(inp[i]))tiles[i].classList.add('present');
+    else tiles[i].classList.add('absent');
+  }
+  if(inp===wWord){document.getElementById('wordResult').textContent='🎉 You got it!';return;}
+  wRow++;
+  if(wRow===6){document.getElementById('wordResult').textContent=`😢 Game Over! Word: ${wWord}`;wWord=words4[Math.floor(Math.random()*words4.length)];wRow=0;initWordGrid();}
+  document.getElementById('wordInput').value='';
+}
+initWordGrid();
+
+// ===================== GAMES I LOVE (with Unsplash images) =====================
+const gameLoveData=[
+  {img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzODAiIGhlaWdodD0iMTcwIiB2aWV3Qm94PSIwIDAgMzgwIDE3MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0idmJnIiB4MT0iMCUiIHkxPSIwJSIgeDI9IjEwMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMGYwZjBmIi8+PHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMWEwMDAwIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+CjxyZWN0IHdpZHRoPSIzODAiIGhlaWdodD0iMTcwIiBmaWxsPSJ1cmwoI3ZiZykiLz4KPCEtLSBBYnN0cmFjdCBnZW9tZXRyaWMgLSBWYWxvcmFudCBzdHlsZSAtLT4KPHBvbHlnb24gcG9pbnRzPSIxOTAsMjAgMzEwLDgwIDMxMCwxMzAgMTkwLDE1MCA3MCwxMzAgNzAsODAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmNDY1NSIgc3Ryb2tlLXdpZHRoPSIxLjUiIG9wYWNpdHk9IjAuNCIvPgo8cG9seWdvbiBwb2ludHM9IjE5MCwzNSAyOTAsODIgMjkwLDEyNSAxOTAsMTQwIDkwLDEyNSA5MCw4MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmY0NjU1IiBzdHJva2Utd2lkdGg9IjEiIG9wYWNpdHk9IjAuMyIvPgo8IS0tIFYgc2hhcGUgbG9nbyBoaW50IC0tPgo8cG9seWdvbiBwb2ludHM9IjE0NSw1MCAxNjUsMTEwIDE5MCw3MCAyMTUsMTEwIDIzNSw1MCAyMTUsNTAgMTkwLDg1IDE2NSw1MCIgZmlsbD0iI2ZmNDY1NSIgb3BhY2l0eT0iMC45Ii8+CjwhLS0gQ3Jvc3NoYWlyIC0tPgo8Y2lyY2xlIGN4PSIxOTAiIGN5PSI5MCIgcj0iMjAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmNDY1NSIgc3Ryb2tlLXdpZHRoPSIxLjUiIG9wYWNpdHk9IjAuNSIvPgo8bGluZSB4MT0iMTkwIiB5MT0iNjUiIHgyPSIxOTAiIHkyPSI4MCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxsaW5lIHgxPSIxOTAiIHkxPSIxMDAiIHgyPSIxOTAiIHkyPSIxMTUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMiIvPgo8bGluZSB4MT0iMTY1IiB5MT0iOTAiIHgyPSIxODAiIHkyPSI5MCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxsaW5lIHgxPSIyMDAiIHkxPSI5MCIgeDI9IjIxNSIgeTI9IjkwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiLz4KPGNpcmNsZSBjeD0iMTkwIiBjeT0iOTAiIHI9IjIiIGZpbGw9IndoaXRlIi8+CjwhLS0gU2NhbiBsaW5lcyAtLT4KPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjM4MCIgaGVpZ2h0PSIxNzAiIGZpbGw9InVybCgjc2NhbikiIG9wYWNpdHk9IjAuMDUiLz4KPGRlZnM+PHBhdHRlcm4gaWQ9InNjYW4iIHdpZHRoPSIxIiBoZWlnaHQ9IjMiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9ImJsYWNrIi8+PC9wYXR0ZXJuPjwvZGVmcz4KPCEtLSBDb3JuZXIgbWFya3MgLS0+CjxsaW5lIHgxPSIzMCIgeTE9IjMwIiB4Mj0iNjAiIHkyPSIzMCIgc3Ryb2tlPSIjZmY0NjU1IiBzdHJva2Utd2lkdGg9IjEuNSIvPgo8bGluZSB4MT0iMzAiIHkxPSIzMCIgeDI9IjMwIiB5Mj0iNjAiIHN0cm9rZT0iI2ZmNDY1NSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KPGxpbmUgeDE9IjM1MCIgeTE9IjMwIiB4Mj0iMzIwIiB5Mj0iMzAiIHN0cm9rZT0iI2ZmNDY1NSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KPGxpbmUgeDE9IjM1MCIgeTE9IjMwIiB4Mj0iMzUwIiB5Mj0iNjAiIHN0cm9rZT0iI2ZmNDY1NSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KPGxpbmUgeDE9IjMwIiB5MT0iMTQwIiB4Mj0iNjAiIHkyPSIxNDAiIHN0cm9rZT0iI2ZmNDY1NSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KPGxpbmUgeDE9IjMwIiB5MT0iMTQwIiB4Mj0iMzAiIHkyPSIxMTAiIHN0cm9rZT0iI2ZmNDY1NSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KPGxpbmUgeDE9IjM1MCIgeTE9IjE0MCIgeDI9IjMyMCIgeTI9IjE0MCIgc3Ryb2tlPSIjZmY0NjU1IiBzdHJva2Utd2lkdGg9IjEuNSIvPgo8bGluZSB4MT0iMzUwIiB5MT0iMTQwIiB4Mj0iMzUwIiB5Mj0iMTEwIiBzdHJva2U9IiNmZjQ2NTUiIHN0cm9rZS13aWR0aD0iMS41Ii8+Cjx0ZXh0IHg9IjE5MCIgeT0iMTU4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmY0NjU1IiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjEwIiBmb250LXdlaWdodD0iYm9sZCI+VkFMT1JBTlQg4pqhPC90ZXh0Pgo8L3N2Zz4=',name:'Valorant',desc:'Tactical FPS, pure skill game!',tag:'🎯 FPS'},
+  {img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzODAiIGhlaWdodD0iMTcwIiB2aWV3Qm94PSIwIDAgMzgwIDE3MCI+CjxyZWN0IHdpZHRoPSIzODAiIGhlaWdodD0iMTcwIiBmaWxsPSIjMWExMjA4Ii8+CjwhLS0gQ2hlc3MgYm9hcmQgKDh4OCBwYXJ0aWFsKSAtLT4KPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoOTAsMTUpIj4KICA8IS0tIEJvYXJkIGJvcmRlciAtLT4KICA8cmVjdCB4PSItMyIgeT0iLTMiIHdpZHRoPSIyMDYiIGhlaWdodD0iMTQ2IiByeD0iNCIgZmlsbD0iIzVjM2ExZSIgc3Ryb2tlPSIjOEI2OTE0IiBzdHJva2Utd2lkdGg9IjIiLz4KICA8IS0tIENoZXNzIHNxdWFyZXMgLS0+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjIwMCIgaGVpZ2h0PSIxNDAiIGZpbGw9IiNmMGQ5YjUiLz4KICA8IS0tIERhcmsgc3F1YXJlcyAtLT4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMjUiIGhlaWdodD0iMTcuNSIgZmlsbD0iI2I1ODg2MyIvPgogIDxyZWN0IHg9IjUwIiB5PSIwIiB3aWR0aD0iMjUiIGhlaWdodD0iMTcuNSIgZmlsbD0iI2I1ODg2MyIvPgogIDxyZWN0IHg9IjEwMCIgeT0iMCIgd2lkdGg9IjI1IiBoZWlnaHQ9IjE3LjUiIGZpbGw9IiNiNTg4NjMiLz4KICA8cmVjdCB4PSIxNTAiIHk9IjAiIHdpZHRoPSIyNSIgaGVpZ2h0PSIxNy41IiBmaWxsPSIjYjU4ODYzIi8+CiAgPHJlY3QgeD0iMjUiIHk9IjE3LjUiIHdpZHRoPSIyNSIgaGVpZ2h0PSIxNy41IiBmaWxsPSIjYjU4ODYzIi8+CiAgPHJlY3QgeD0iNzUiIHk9IjE3LjUiIHdpZHRoPSIyNSIgaGVpZ2h0PSIxNy41IiBmaWxsPSIjYjU4ODYzIi8+CiAgPHJlY3QgeD0iMTI1IiB5PSIxNy41IiB3aWR0aD0iMjUiIGhlaWdodD0iMTcuNSIgZmlsbD0iI2I1ODg2MyIvPgogIDxyZWN0IHg9IjE3NSIgeT0iMTcuNSIgd2lkdGg9IjI1IiBoZWlnaHQ9IjE3LjUiIGZpbGw9IiNiNTg4NjMiLz4KICA8cmVjdCB4PSIwIiB5PSIzNSIgd2lkdGg9IjI1IiBoZWlnaHQ9IjE3LjUiIGZpbGw9IiNiNTg4NjMiLz4KICA8cmVjdCB4PSI1MCIgeT0iMzUiIHdpZHRoPSIyNSIgaGVpZ2h0PSIxNy41IiBmaWxsPSIjYjU4ODYzIi8+CiAgPHJlY3QgeD0iMTAwIiB5PSIzNSIgd2lkdGg9IjI1IiBoZWlnaHQ9IjE3LjUiIGZpbGw9IiNiNTg4NjMiLz4KICA8cmVjdCB4PSIxNTAiIHk9IjM1IiB3aWR0aD0iMjUiIGhlaWdodD0iMTcuNSIgZmlsbD0iI2I1ODg2MyIvPgogIDxyZWN0IHg9IjI1IiB5PSI1Mi41IiB3aWR0aD0iMjUiIGhlaWdodD0iMTcuNSIgZmlsbD0iI2I1ODg2MyIvPgogIDxyZWN0IHg9Ijc1IiB5PSI1Mi41IiB3aWR0aD0iMjUiIGhlaWdodD0iMTcuNSIgZmlsbD0iI2I1ODg2MyIvPgogIDxyZWN0IHg9IjEyNSIgeT0iNTIuNSIgd2lkdGg9IjI1IiBoZWlnaHQ9IjE3LjUiIGZpbGw9IiNiNTg4NjMiLz4KICA8cmVjdCB4PSIxNzUiIHk9IjUyLjUiIHdpZHRoPSIyNSIgaGVpZ2h0PSIxNy41IiBmaWxsPSIjYjU4ODYzIi8+CiAgPHJlY3QgeD0iMCIgeT0iNzAiIHdpZHRoPSIyNSIgaGVpZ2h0PSIxNy41IiBmaWxsPSIjYjU4ODYzIi8+CiAgPHJlY3QgeD0iNTAiIHk9IjcwIiB3aWR0aD0iMjUiIGhlaWdodD0iMTcuNSIgZmlsbD0iI2I1ODg2MyIvPgogIDxyZWN0IHg9IjEwMCIgeT0iNzAiIHdpZHRoPSIyNSIgaGVpZ2h0PSIxNy41IiBmaWxsPSIjYjU4ODYzIi8+CiAgPHJlY3QgeD0iMTUwIiB5PSI3MCIgd2lkdGg9IjI1IiBoZWlnaHQ9IjE3LjUiIGZpbGw9IiNiNTg4NjMiLz4KICA8cmVjdCB4PSIyNSIgeT0iODcuNSIgd2lkdGg9IjI1IiBoZWlnaHQ9IjE3LjUiIGZpbGw9IiNiNTg4NjMiLz4KICA8cmVjdCB4PSI3NSIgeT0iODcuNSIgd2lkdGg9IjI1IiBoZWlnaHQ9IjE3LjUiIGZpbGw9IiNiNTg4NjMiLz4KICA8cmVjdCB4PSIxMjUiIHk9Ijg3LjUiIHdpZHRoPSIyNSIgaGVpZ2h0PSIxNy41IiBmaWxsPSIjYjU4ODYzIi8+CiAgPHJlY3QgeD0iMTc1IiB5PSI4Ny41IiB3aWR0aD0iMjUiIGhlaWdodD0iMTcuNSIgZmlsbD0iI2I1ODg2MyIvPgogIDxyZWN0IHg9IjAiIHk9IjEwNSIgd2lkdGg9IjI1IiBoZWlnaHQ9IjE3LjUiIGZpbGw9IiNiNTg4NjMiLz4KICA8cmVjdCB4PSI1MCIgeT0iMTA1IiB3aWR0aD0iMjUiIGhlaWdodD0iMTcuNSIgZmlsbD0iI2I1ODg2MyIvPgogIDxyZWN0IHg9IjEwMCIgeT0iMTA1IiB3aWR0aD0iMjUiIGhlaWdodD0iMTcuNSIgZmlsbD0iI2I1ODg2MyIvPgogIDxyZWN0IHg9IjE1MCIgeT0iMTA1IiB3aWR0aD0iMjUiIGhlaWdodD0iMTcuNSIgZmlsbD0iI2I1ODg2MyIvPgogIDxyZWN0IHg9IjI1IiB5PSIxMjIuNSIgd2lkdGg9IjI1IiBoZWlnaHQ9IjE3LjUiIGZpbGw9IiNiNTg4NjMiLz4KICA8cmVjdCB4PSI3NSIgeT0iMTIyLjUiIHdpZHRoPSIyNSIgaGVpZ2h0PSIxNy41IiBmaWxsPSIjYjU4ODYzIi8+CiAgPHJlY3QgeD0iMTI1IiB5PSIxMjIuNSIgd2lkdGg9IjI1IiBoZWlnaHQ9IjE3LjUiIGZpbGw9IiNiNTg4NjMiLz4KICA8cmVjdCB4PSIxNzUiIHk9IjEyMi41IiB3aWR0aD0iMjUiIGhlaWdodD0iMTcuNSIgZmlsbD0iI2I1ODg2MyIvPgogIDwhLS0gUGllY2VzICh0ZXh0IGVtb2ppcykgLS0+CiAgPHRleHQgeD0iMyIgeT0iMTUiIGZvbnQtc2l6ZT0iMTQiPuKZnDwvdGV4dD4KICA8dGV4dCB4PSIyOCIgeT0iMTUiIGZvbnQtc2l6ZT0iMTQiPuKZnjwvdGV4dD4KICA8dGV4dCB4PSI1MyIgeT0iMTUiIGZvbnQtc2l6ZT0iMTQiPuKZnTwvdGV4dD4KICA8dGV4dCB4PSI3OCIgeT0iMTUiIGZvbnQtc2l6ZT0iMTQiPuKZmzwvdGV4dD4KICA8dGV4dCB4PSIxMDMiIHk9IjE1IiBmb250LXNpemU9IjE0Ij7imZo8L3RleHQ+CiAgPHRleHQgeD0iMyIgeT0iMzIiIGZvbnQtc2l6ZT0iMTIiPuKZnzwvdGV4dD4KICA8dGV4dCB4PSIyOCIgeT0iMzIiIGZvbnQtc2l6ZT0iMTIiPuKZnzwvdGV4dD4KICA8dGV4dCB4PSI1MyIgeT0iMzIiIGZvbnQtc2l6ZT0iMTIiPuKZnzwvdGV4dD4KICA8dGV4dCB4PSI3OCIgeT0iMzIiIGZvbnQtc2l6ZT0iMTIiPuKZnzwvdGV4dD4KICA8dGV4dCB4PSIxMDMiIHk9IjMyIiBmb250LXNpemU9IjEyIj7imZ88L3RleHQ+CiAgPHRleHQgeD0iMyIgeT0iMTI4IiBmb250LXNpemU9IjE0IiBmaWxsPSIjZjBkOWI1Ij7imZY8L3RleHQ+CiAgPHRleHQgeD0iMjgiIHk9IjEyOCIgZm9udC1zaXplPSIxNCIgZmlsbD0iI2YwZDliNSI+4pmYPC90ZXh0PgogIDx0ZXh0IHg9Ijc4IiB5PSIxMjgiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiNmMGQ5YjUiPuKZlTwvdGV4dD4KICA8dGV4dCB4PSIxMDMiIHk9IjEyOCIgZm9udC1zaXplPSIxNCIgZmlsbD0iI2YwZDliNSI+4pmUPC90ZXh0PgogIDwhLS0gSGlnaGxpZ2h0IHNxdWFyZSAtLT4KICA8cmVjdCB4PSI3NSIgeT0iNTIuNSIgd2lkdGg9IjI1IiBoZWlnaHQ9IjE3LjUiIGZpbGw9IiM3ZmM5N2YiIG9wYWNpdHk9IjAuNiIvPgo8L2c+Cjx0ZXh0IHg9IjE5MCIgeT0iMTYyIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZDRhODQzIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjEwIiBmb250LXdlaWdodD0iYm9sZCI+4pmfIENoZXNzIOKAlCBNaW5kIG92ZXIgTWF0dGVyPC90ZXh0Pgo8L3N2Zz4=',name:'Chess',desc:'Mind over matter — pure strategy.',tag:'♟ Strategy'},
+  {img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzODAiIGhlaWdodD0iMTcwIiB2aWV3Qm94PSIwIDAgMzgwIDE3MCI+CjxyZWN0IHdpZHRoPSIzODAiIGhlaWdodD0iMTcwIiBmaWxsPSIjODdDRUVCIi8+CjwhLS0gU2t5IGdyYWRpZW50IC0tPgo8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9InNreSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM0YTkwZDkiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiM4N0NFRUIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjM4MCIgaGVpZ2h0PSIxNzAiIGZpbGw9InVybCgjc2t5KSIvPgo8IS0tIFN1biAtLT4KPHJlY3QgeD0iMzIwIiB5PSIxNSIgd2lkdGg9IjMwIiBoZWlnaHQ9IjMwIiBmaWxsPSIjRkZENzAwIiBvcGFjaXR5PSIwLjk1Ii8+CjwhLS0gQ2xvdWRzIChwaXhlbCBzdHlsZSkgLS0+CjxyZWN0IHg9IjQwIiB5PSIyNSIgd2lkdGg9IjYwIiBoZWlnaHQ9IjE1IiByeD0iMiIgZmlsbD0id2hpdGUiIG9wYWNpdHk9IjAuODUiLz4KPHJlY3QgeD0iMzAiIHk9IjMwIiB3aWR0aD0iODAiIGhlaWdodD0iMTUiIHJ4PSIyIiBmaWxsPSJ3aGl0ZSIgb3BhY2l0eT0iMC44NSIvPgo8IS0tIEdyb3VuZCBsYXllcnMgLS0+CjxyZWN0IHg9IjAiIHk9IjExNSIgd2lkdGg9IjM4MCIgaGVpZ2h0PSI1NSIgZmlsbD0iIzVkM2ExYSIvPgo8IS0tIEdyYXNzIHRvcCAtLT4KPHJlY3QgeD0iMCIgeT0iMTEwIiB3aWR0aD0iMzgwIiBoZWlnaHQ9IjgiIGZpbGw9IiM0Y2FmNTAiLz4KPCEtLSBEaXJ0IGJsb2NrcyAtLT4KPHJlY3QgeD0iMCIgeT0iMTE4IiB3aWR0aD0iNDAiIGhlaWdodD0iMjAiIGZpbGw9IiM4QjQ1MTMiIHN0cm9rZT0iIzVkM2ExYSIgc3Ryb2tlLXdpZHRoPSIxIi8+CjxyZWN0IHg9IjQwIiB5PSIxMTgiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyMCIgZmlsbD0iIzhCNDUxMyIgc3Ryb2tlPSIjNWQzYTFhIiBzdHJva2Utd2lkdGg9IjEiLz4KPHJlY3QgeD0iODAiIHk9IjExOCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjN2EzYzExIiBzdHJva2U9IiM1ZDNhMWEiIHN0cm9rZS13aWR0aD0iMSIvPgo8cmVjdCB4PSIxMjAiIHk9IjExOCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjOEI0NTEzIiBzdHJva2U9IiM1ZDNhMWEiIHN0cm9rZS13aWR0aD0iMSIvPgo8cmVjdCB4PSIxNjAiIHk9IjExOCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjN2EzYzExIiBzdHJva2U9IiM1ZDNhMWEiIHN0cm9rZS13aWR0aD0iMSIvPgo8cmVjdCB4PSIyMDAiIHk9IjExOCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjOEI0NTEzIiBzdHJva2U9IiM1ZDNhMWEiIHN0cm9rZS13aWR0aD0iMSIvPgo8cmVjdCB4PSIyNDAiIHk9IjExOCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjN2EzYzExIiBzdHJva2U9IiM1ZDNhMWEiIHN0cm9rZS13aWR0aD0iMSIvPgo8cmVjdCB4PSIyODAiIHk9IjExOCIgd2lkdGg9IjEwMCIgaGVpZ2h0PSIyMCIgZmlsbD0iIzhCNDUxMyIgc3Ryb2tlPSIjNWQzYTFhIiBzdHJva2Utd2lkdGg9IjEiLz4KPCEtLSBTdG9uZS9vcmUgbGF5ZXIgLS0+CjxyZWN0IHg9IjAiIHk9IjEzOCIgd2lkdGg9IjM4MCIgaGVpZ2h0PSIzMiIgZmlsbD0iIzg4OCIgc3Ryb2tlPSIjNjY2IiBzdHJva2Utd2lkdGg9IjAuNSIvPgo8IS0tIE9yZSBkb3RzIC0tPgo8cmVjdCB4PSIyMCIgeT0iMTQ1IiB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjNGE5MGQ5IiBvcGFjaXR5PSIwLjciLz4KPHJlY3QgeD0iMTAwIiB5PSIxNTAiIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIGZpbGw9IiNlNzRjM2MiIG9wYWNpdHk9IjAuNyIvPgo8cmVjdCB4PSIyMDAiIHk9IjE0NCIgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0iI2YzOWMxMiIgb3BhY2l0eT0iMC43Ii8+CjxyZWN0IHg9IjMwMCIgeT0iMTQ4IiB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjMmVjYzcxIiBvcGFjaXR5PSIwLjciLz4KPCEtLSBUcmVlcyAocGl4ZWwgc3R5bGUpIC0tPgo8cmVjdCB4PSI2MCIgeT0iNzUiIHdpZHRoPSIxMCIgaGVpZ2h0PSIzNSIgZmlsbD0iIzVkM2ExYSIvPgo8cmVjdCB4PSI0NSIgeT0iNTUiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyMiIgZmlsbD0iIzJkNWExYiIvPgo8cmVjdCB4PSI1MCIgeT0iNDUiIHdpZHRoPSIzMCIgaGVpZ2h0PSIxNCIgZmlsbD0iIzJkNWExYiIvPgo8cmVjdCB4PSIxMzAiIHk9IjgwIiB3aWR0aD0iMTAiIGhlaWdodD0iMzAiIGZpbGw9IiM1ZDNhMWEiLz4KPHJlY3QgeD0iMTE1IiB5PSI2MiIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjMmQ1YTFiIi8+CjxyZWN0IHg9IjEyMCIgeT0iNTIiIHdpZHRoPSIzMCIgaGVpZ2h0PSIxNCIgZmlsbD0iIzJkNWExYiIvPgo8IS0tIENyZWVwZXIgZmFjZSBvbiBhIGJsb2NrIC0tPgo8cmVjdCB4PSIyODAiIHk9IjY4IiB3aWR0aD0iNDIiIGhlaWdodD0iNDIiIGZpbGw9IiMzZDhiMzciIHN0cm9rZT0iIzJkNmIyNyIgc3Ryb2tlLXdpZHRoPSIxIi8+CjxyZWN0IHg9IjI4OCIgeT0iNzYiIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIGZpbGw9IiMxYTNkMTgiLz4KPHJlY3QgeD0iMzA2IiB5PSI3NiIgd2lkdGg9IjgiIGhlaWdodD0iOCIgZmlsbD0iIzFhM2QxOCIvPgo8cmVjdCB4PSIyOTYiIHk9Ijg3IiB3aWR0aD0iMTAiIGhlaWdodD0iNCIgZmlsbD0iIzFhM2QxOCIvPgo8cmVjdCB4PSIyOTIiIHk9IjkxIiB3aWR0aD0iMTgiIGhlaWdodD0iNCIgZmlsbD0iIzFhM2QxOCIvPgo8cmVjdCB4PSIyOTYiIHk9Ijk1IiB3aWR0aD0iMTAiIGhlaWdodD0iNCIgZmlsbD0iIzFhM2QxOCIvPgo8IS0tIFN0ZXZlIHBpeGVsIGFydCBoaW50IC0tPgo8cmVjdCB4PSIxOTUiIHk9IjgwIiB3aWR0aD0iMjAiIGhlaWdodD0iMzAiIGZpbGw9IiM2ZDRjNDEiLz4KPHJlY3QgeD0iMTk1IiB5PSI4MCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjEyIiBmaWxsPSIjZmZjY2JjIi8+CjxyZWN0IHg9IjE5OCIgeT0iODQiIHdpZHRoPSI0IiBoZWlnaHQ9IjQiIGZpbGw9IiMxNTY1YzAiLz4KPHJlY3QgeD0iMjEyIiB5PSI4NCIgd2lkdGg9IjQiIGhlaWdodD0iNCIgZmlsbD0iIzE1NjVjMCIvPgo8dGV4dCB4PSIxOTAiIHk9IjE2MiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzJkNWExYiIgZm9udC1mYW1pbHk9Im1vbm9zcGFjZSIgZm9udC1zaXplPSIxMCIgZm9udC13ZWlnaHQ9ImJvbGQiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMyIgcGFpbnQtb3JkZXI9InN0cm9rZSI+4puPIE1pbmVjcmFmdCDigJQgQnVpbGQgQW55dGhpbmchPC90ZXh0Pgo8L3N2Zz4=',name:'Minecraft',desc:'Build anything, infinite world!',tag:'⛏ Sandbox'},
+  {img:'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzODAiIGhlaWdodD0iMTcwIiB2aWV3Qm94PSIwIDAgMzgwIDE3MCI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0icGl0Y2giIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMCUiIHkyPSIxMDAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojMWE2YjFhIi8+PHN0b3Agb2Zmc2V0PSI1MCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxZThiMWUiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMxYTZiMWEiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjM4MCIgaGVpZ2h0PSIxNzAiIGZpbGw9InVybCgjcGl0Y2gpIi8+CjwhLS0gUGl0Y2ggc3RyaXBlcyAtLT4KPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjQ3LjUiIGhlaWdodD0iMTcwIiBmaWxsPSIjMWU4YjFlIiBvcGFjaXR5PSIwLjUiLz4KPHJlY3QgeD0iOTUiIHk9IjAiIHdpZHRoPSI0Ny41IiBoZWlnaHQ9IjE3MCIgZmlsbD0iIzFlOGIxZSIgb3BhY2l0eT0iMC41Ii8+CjxyZWN0IHg9IjE5MCIgeT0iMCIgd2lkdGg9IjQ3LjUiIGhlaWdodD0iMTcwIiBmaWxsPSIjMWU4YjFlIiBvcGFjaXR5PSIwLjUiLz4KPHJlY3QgeD0iMjg1IiB5PSIwIiB3aWR0aD0iNDcuNSIgaGVpZ2h0PSIxNzAiIGZpbGw9IiMxZThiMWUiIG9wYWNpdHk9IjAuNSIvPgo8IS0tIEZpZWxkIGxpbmVzIC0tPgo8cmVjdCB4PSIyMCIgeT0iMjAiIHdpZHRoPSIzNDAiIGhlaWdodD0iMTMwIiByeD0iNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBvcGFjaXR5PSIwLjkiLz4KPGxpbmUgeDE9IjE5MCIgeTE9IjIwIiB4Mj0iMTkwIiB5Mj0iMTUwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIG9wYWNpdHk9IjAuOSIvPgo8IS0tIENlbnRlciBjaXJjbGUgLS0+CjxjaXJjbGUgY3g9IjE5MCIgY3k9Ijg1IiByPSIzNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIyIiBvcGFjaXR5PSIwLjkiLz4KPGNpcmNsZSBjeD0iMTkwIiBjeT0iODUiIHI9IjMiIGZpbGw9IndoaXRlIi8+CjwhLS0gUGVuYWx0eSBhcmVhcyAtLT4KPHJlY3QgeD0iMjAiIHk9IjQ3IiB3aWR0aD0iNjUiIGhlaWdodD0iNzYiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMS41IiBvcGFjaXR5PSIwLjgiLz4KPHJlY3QgeD0iMjk1IiB5PSI0NyIgd2lkdGg9IjY1IiBoZWlnaHQ9Ijc2IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEuNSIgb3BhY2l0eT0iMC44Ii8+CjwhLS0gR29hbHMgLS0+CjxyZWN0IHg9IjUiIHk9IjY1IiB3aWR0aD0iMTUiIGhlaWdodD0iNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMi41IiBvcGFjaXR5PSIwLjkiLz4KPHJlY3QgeD0iMzYwIiB5PSI2NSIgd2lkdGg9IjE1IiBoZWlnaHQ9IjQwIiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIuNSIgb3BhY2l0eT0iMC45Ii8+CjwhLS0gR29hbCBuZXRzIChsaW5lcykgLS0+CjxsaW5lIHgxPSI1IiB5MT0iNzIiIHgyPSIyMCIgeTI9IjcyIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjAuNSIgb3BhY2l0eT0iMC40Ii8+CjxsaW5lIHgxPSI1IiB5MT0iNzkiIHgyPSIyMCIgeTI9Ijc5IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjAuNSIgb3BhY2l0eT0iMC40Ii8+CjxsaW5lIHgxPSI1IiB5MT0iODYiIHgyPSIyMCIgeTI9Ijg2IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjAuNSIgb3BhY2l0eT0iMC40Ii8+CjxsaW5lIHgxPSI1IiB5MT0iOTMiIHgyPSIyMCIgeTI9IjkzIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjAuNSIgb3BhY2l0eT0iMC40Ii8+CjxsaW5lIHgxPSI1IiB5MT0iMTAwIiB4Mj0iMjAiIHkyPSIxMDAiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMC41IiBvcGFjaXR5PSIwLjQiLz4KPGxpbmUgeDE9IjM2MCIgeTE9IjcyIiB4Mj0iMzc1IiB5Mj0iNzIiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMC41IiBvcGFjaXR5PSIwLjQiLz4KPGxpbmUgeDE9IjM2MCIgeTE9Ijc5IiB4Mj0iMzc1IiB5Mj0iNzkiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMC41IiBvcGFjaXR5PSIwLjQiLz4KPGxpbmUgeDE9IjM2MCIgeTE9Ijg2IiB4Mj0iMzc1IiB5Mj0iODYiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMC41IiBvcGFjaXR5PSIwLjQiLz4KPCEtLSBTb2NjZXIgYmFsbCAtLT4KPGNpcmNsZSBjeD0iMTkwIiBjeT0iODUiIHI9IjEyIiBmaWxsPSJ3aGl0ZSIgc3Ryb2tlPSIjMzMzIiBzdHJva2Utd2lkdGg9IjAuNSIvPgo8cG9seWdvbiBwb2ludHM9IjE5MCw3NSAxOTYsODAgMTk0LDg3IDE4Niw4NyAxODQsODAiIGZpbGw9IiMzMzMiIG9wYWNpdHk9IjAuOCIvPgo8cG9seWdvbiBwb2ludHM9IjE5MCw5NyAxOTYsOTIgMjAxLDk1IDIwMCwxMDMgMTgwLDEwMyAxNzksOTUgMTg0LDkyIiBmaWxsPSIjMzMzIiBvcGFjaXR5PSIwLjYiLz4KPCEtLSBQbGF5ZXJzIGRvdHMgLS0+CjxjaXJjbGUgY3g9IjEyMCIgY3k9IjYwIiByPSI2IiBmaWxsPSIjZWY0NDQ0IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEuNSIvPgo8Y2lyY2xlIGN4PSIxNTAiIGN5PSI5MCIgcj0iNiIgZmlsbD0iI2VmNDQ0NCIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KPGNpcmNsZSBjeD0iMTIwIiBjeT0iMTE1IiByPSI2IiBmaWxsPSIjZWY0NDQ0IiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjEuNSIvPgo8Y2lyY2xlIGN4PSIyNDAiIGN5PSI2NSIgcj0iNiIgZmlsbD0iIzNiODJmNiIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KPGNpcmNsZSBjeD0iMjYwIiBjeT0iOTUiIHI9IjYiIGZpbGw9IiMzYjgyZjYiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMS41Ii8+CjxjaXJjbGUgY3g9IjI0MCIgY3k9IjEyMCIgcj0iNiIgZmlsbD0iIzNiODJmNiIgc3Ryb2tlPSJ3aGl0ZSIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KPHRleHQgeD0iMTkwIiB5PSIxNjIiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjEwIiBmb250LXdlaWdodD0iYm9sZCIgb3BhY2l0eT0iMC45NSI+4pq9IEZJRkEg4oCUIEZvb3RiYWxsIFBhc3Npb24hPC90ZXh0Pgo8L3N2Zz4=',name:'FIFA',desc:'Football passion every match!',tag:'⚽ Sports'},
+];
+const glg=document.getElementById('gameLoveGrid');
+gameLoveData.forEach(g=>{
+  glg.innerHTML+=`<div class="game-love-card">
+    <div class="glc-img"><img src="${g.img}" alt="${g.name}" loading="lazy"></div>
+    <div class="glc-body"><h3>${g.name}</h3><p>${g.desc}</p><span class="glc-tag">${g.tag}</span></div>
+  </div>`;
+});
+
+// ===================== MOTIVATION QUOTES =====================
+const quotes=[
+  '"Code is poetry written in logic." — Unknown',
+  '"Every expert was once a beginner." — Helen Hayes',
+  '"Dream big, start small, act now." — Robin Sharma',
+  '"The only way to do great work is to love what you do." — Steve Jobs',
+  '"In the middle of every difficulty lies opportunity." — Albert Einstein',
+  '"Push yourself, because no one else is going to do it for you." — Unknown',
+  '"Success is not final, failure is not fatal." — Winston Churchill',
+  '"Stay hungry, stay foolish." — Steve Jobs',
+];
+function newQuote(){document.getElementById('quoteText').textContent=quotes[Math.floor(Math.random()*quotes.length)];}
+newQuote();
+
+// ===================== CONTACT FORM =====================
+function submitForm(e){
+  e.preventDefault();
+  document.getElementById('formMsg').textContent='🚀 Message sent! Thanks!';
+  e.target.reset();
+  setTimeout(()=>document.getElementById('formMsg').textContent='',3000);
+}
+
+// ===================== AI CHATBOT (Real Claude API) =====================
+let chatOpen=false;
+const chatMessages=[];
+
+function toggleChat(){
+  chatOpen=!chatOpen;
+  const box=document.getElementById('chatBox');
+  box.style.display=chatOpen?'flex':'none';
+  if(chatOpen&&document.getElementById('chatMessages').children.length===0){
+    addBotMsg('Namaste! 👋 Main Harsh ka AI assistant hoon. Kuch bhi poochho — coding, gaming, ya bas baat karo! 😊');
+  }
+}
+
+function addBotMsg(text){
+  const d=document.createElement('div');
+  d.className='chat-msg bot';d.textContent=text;
+  document.getElementById('chatMessages').appendChild(d);
+  document.getElementById('chatMessages').scrollTop=99999;
+}
+function addUserMsg(text){
+  const d=document.createElement('div');
+  d.className='chat-msg user';d.textContent=text;
+  document.getElementById('chatMessages').appendChild(d);
+  document.getElementById('chatMessages').scrollTop=99999;
+}
+function showTyping(){
+  const d=document.createElement('div');
+  d.className='chat-msg bot chat-typing';d.id='typingIndicator';
+  d.innerHTML='<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+  document.getElementById('chatMessages').appendChild(d);
+  document.getElementById('chatMessages').scrollTop=99999;
+}
+function removeTyping(){
+  const t=document.getElementById('typingIndicator');
+  if(t)t.remove();
+}
+
+async function sendChat(){
+  const inp=document.getElementById('chatInput');
+  const text=inp.value.trim();
+  if(!text)return;
+  inp.value='';
+  addUserMsg(text);
+  chatMessages.push({role:'user',content:text});
+  showTyping();
+
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system:'Tu Harsh Harode ka personal AI assistant hai. Harsh ek passionate coder, gamer aur designer hai. Tu friendly, fun aur helpful hai. Mostly Hinglish (Hindi+English mix) mein baat kar jaise dost karte hain. Chhote aur helpful replies do.',
+        messages:chatMessages
+      })
+    });
+    const data=await res.json();
+    removeTyping();
+    const reply=data.content?.[0]?.text||'Sorry, kuch error aaya! 😅';
+    chatMessages.push({role:'assistant',content:reply});
+    addBotMsg(reply);
+  }catch(err){
+    removeTyping();
+    addBotMsg('Oops! Network error. Thodi der baad try karo. 😅');
+  }
+}
+</script>
+</body>
+</html>
